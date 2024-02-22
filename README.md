@@ -46,5 +46,5 @@ Use pre-built Tailwind components or create your own for reusable styling.
 Additional Resources:
 
 Vite documentation: https://vitejs.dev/
-React Router documentation: [invalid URL removed]
+React Router documentation: https://react.dev/
 Tailwind CSS documentation: https://tailwindcss.com/
