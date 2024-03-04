@@ -5,6 +5,11 @@ import AllProducts from "../components/AllProducts";
 // import SingleProduct from "../components/SingleProduct";
 import Navbar from "../components/Navbar";
 import FeaturedGames from "../components/FeaturedGames"; // Import FeaturedGames
+import Users from "../components/Users";
+import SingleUser from "../components/SingleUser";
+import Login from "../components/Login";
+import Register from "../components/Register";
+import Account from "../components/Account";
 
 function App() {
   const [games, setGames] = useState([]);
@@ -19,7 +24,7 @@ function App() {
         setGames(data.featuredGames);
         setTotalPages(data.pagination.totalPages);
       } catch (error) {
-        console.error("Error fetching games:", error);
+        console.log("Error fetching games:", error);
       }
     };
 
@@ -36,6 +41,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/products" element={<AllProducts />} />
+        <Route path="/users" element={<Users />}></Route>
+        <Route path="/users/:id" element={<SingleUser />}></Route>
+        <Route path="/auth/register" element={<Register />}></Route>
+        <Route path="/auth/login" element={<Login />}></Route>
+        <Route path="/auth/me" element={<Account />}></Route>
       </Routes>
     </Router>
   );
