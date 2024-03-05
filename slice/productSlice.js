@@ -10,7 +10,7 @@ const initialState = {
 export const fetchGamesAsync = createAsyncThunk(
   "games/fetchGames",
   async () => {
-    return await fetchGames(); // Use the imported function
+    return await fetchGames(); 
   }
 );
 

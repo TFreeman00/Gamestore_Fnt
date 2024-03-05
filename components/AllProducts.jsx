@@ -26,7 +26,6 @@ function AllProducts() {
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
-        // Handle errors appropriately, e.g., display an error message to the user
       }
     };
 
