@@ -10,7 +10,7 @@ function ProductCard({ product }) {
         <img
           src={
             product.cover
-              ? `https://cdn.igdb.com/covers/${product.cover}`
+              ? `https://images.igdb.com/igdb/image/upload/cover_small/${image_id}`
               : "placeholder.png"
           }
           alt={product.name}

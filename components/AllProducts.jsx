@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchGamesAsync, fetchCoversAsync } from "../slice/productSlice";
+import {
+  fetchGamesAsync,
+  fetchCoversAsync,
+  fetchVideosAsync,
+} from "../slice/productSlice";
 import ProductCard from "./ProductCard";
+
 function AllProducts() {
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchGamesAsync())
       .then(() => dispatch(fetchCoversAsync()))
+      .then(() => dispatch(fetchVideosAsync()))
       .finally(() => setLoading(false));
   }, [dispatch]);
+
   const products = useSelector((state) => state.games.games);
   const covers = useSelector((state) => state.games.covers);
+  const videos = useSelector((state) => state.games.videos);
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -23,11 +31,13 @@ function AllProducts() {
         ) : products.length > 0 ? (
           products.map((product) => {
             const cover = covers.find((cover) => cover.game === product.id);
-            const coverUrl = cover ? cover.url : "placeholder.png";
+            const video = videos.find((video) => video.game === product.id);
             return (
               <ProductCard
                 key={product.id}
-                product={{ ...product, coverUrl }}
+                product={product}
+                cover={cover}
+                video={video}
               />
             );
           })
@@ -38,4 +48,6 @@ function AllProducts() {
     </div>
   );
 }
+
 export default AllProducts;
+
