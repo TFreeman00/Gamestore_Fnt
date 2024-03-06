@@ -20,7 +20,6 @@ export default function Register() {
     e.preventDefault();
 
     const results = addNewUser(form);
-    // console.log(results);
     navigate("/auth/me");
   };
 

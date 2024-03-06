@@ -9,7 +9,7 @@ export const usersApi = createApi({
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: ({ token }) => ({
-        url: "/api/users",
+        url: "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -19,7 +19,7 @@ export const usersApi = createApi({
 
     getUser: builder.query({
       query: ({ id, token }) => ({
-        url: "/api/users/" + id,
+        url: "/users/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ export const usersApi = createApi({
 
     updateUser: builder.mutation({
       query: ({ id, firstname, lastname, password, token }) => ({
-        url: "/api/users/" + id,
+        url: "/users/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

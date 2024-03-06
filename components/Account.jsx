@@ -6,9 +6,9 @@ export default function Account() {
   const { users, token } = useSelector((state) => state.authSlice);
   const navigate = useNavigate();
 
-  // const onEdit = () => {
-  //   navigate(`/users/me/${users.id}`);
-  // };
+  const onEdit = () => {
+    navigate(`/users/me/${users.id}`);
+  };
   return (
     <div>
       {users && (
@@ -20,7 +20,7 @@ export default function Account() {
           <h4>Last Name: {users.lastname}</h4>
           <h4>Email: {users.email}</h4>
           <h4>Password: {users.password}</h4>
-          {/* <button onClick={onEdit}>Edit</button> */}
+          <button onClick={onEdit}>Edit</button>
         </div>
       )}
     </div>

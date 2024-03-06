@@ -1,46 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchGamesAsync, fetchCoversAsync } from "../slice/productSlice";
 import ProductCard from "./ProductCard";
-
 function AllProducts() {
-  const [products, setProducts] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("https://api-v3.igdb.com/games", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer YOUR_IGDB_API_TOKEN", // Replace with your token
-          },
-          body: JSON.stringify({
-            fields: ["name", "cover.url", "first_release_date", "price"],
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        // Handle errors appropriately, e.g., display an error message to the user
-      }
-    };
-
-    fetchProducts();
-  }, []);
+    setLoading(true);
+    dispatch(fetchGamesAsync())
+      .then(() => dispatch(fetchCoversAsync()))
+      .finally(() => setLoading(false));
+  }, [dispatch]);
+  const products = useSelector((state) => state.games.games);
+  const covers = useSelector((state) => state.games.covers);
 
   return (
     <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold mb-8">All Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : products.length > 0 ? (
+          products.map((product) => {
+            const cover = covers.find((cover) => cover.game === product.id);
+            const coverUrl = cover ? cover.url : "placeholder.png";
+            return (
+              <ProductCard
+                key={product.id}
+                product={{ ...product, coverUrl }}
+              />
+            );
+          })
         ) : (
           <p className="text-center">No products found.</p>
         )}
@@ -48,5 +38,4 @@ function AllProducts() {
     </div>
   );
 }
-
 export default AllProducts;
