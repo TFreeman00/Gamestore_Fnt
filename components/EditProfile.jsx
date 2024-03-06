@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navigation from "../components/Navigation";
 import { useUpdateUserMutation } from "../api/usersApi";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -8,7 +7,7 @@ import { useSelector } from "react-redux";
 export default function EditProfile() {
   const { id } = useParams();
   const { users, token } = useSelector((state) => state.authSlice);
-  // console.log(token);
+  // const { users, token } = useSelector((state) => state.usersSlice);
   const [updateUser] = useUpdateUserMutation();
   const navigate = useNavigate();
 
@@ -25,22 +24,22 @@ export default function EditProfile() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const results = updateUser({
+
+    const result = updateUser({
       id,
       firstname: form.firstname,
       lastname: form.lastname,
       password: form.password,
       token,
     });
-    console.log(results);
-    navigate("/users/me");
+    console.log(result);
+    navigate("/auth/me");
   };
 
   return (
     <>
-      <Navigation></Navigation>
       <div>
-        <h2>Update User Info</h2>
+        <h2>Update User Info:</h2>
         <form onSubmit={onSubmit}>
           <label>
             First Name:

@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../api/authApi";
-// import { useSessionAddToCartMutation } from "../api/cartApi";
+import { useSessionAddToCartMutation } from "../api/cartApi";
 
 export default function Login() {
-  // const [cart] = useSessionAddToCartMutation();
+  const [cart] = useSessionAddToCartMutation();
   const navigate = useNavigate();
   const [data] = useLoginUserMutation();
   const [form, setForm] = useState({
@@ -22,17 +22,17 @@ export default function Login() {
 
     const result = await data(form);
 
-    // if (!result.error && window.sessionStorage.cart) {
-    //   let session = JSON.parse(window.sessionStorage.cart).map((cart) => {
-    //     return {
-    //       productid: Number(cart.productid),
-    //       userid: result.data.user.id,
-    //     };
-    //   });
-    //   cart({ cart: session, token: result.data.token });
-    //   window.sessionStorage.removeItem("cart");
-    //   window.sessionStorage.removeItem("counter");
-    // }
+    if (!result.error && window.sessionStorage.cart) {
+      let session = JSON.parse(window.sessionStorage.cart).map((cart) => {
+        return {
+          productid: Number(cart.productid),
+          userid: result.data.user.id,
+        };
+      });
+      cart({ cart: session, token: result.data.token });
+      window.sessionStorage.removeItem("cart");
+      window.sessionStorage.removeItem("counter");
+    }
     navigate("/");
   };
 
@@ -42,11 +42,22 @@ export default function Login() {
         <h2>Login</h2>
         <form onSubmit={onSubmit}>
           <label>
-            Email: <input type="email" name="email" onChange={onChange}></input>
+            Email:{" "}
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={onChange}
+            ></input>
           </label>
           <label>
             Password:{" "}
-            <input type="password" name="password" onChange={onChange}></input>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={onChange}
+            ></input>
           </label>
           <button>Submit</button>
         </form>

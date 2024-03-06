@@ -5,18 +5,15 @@ import { setToken } from "../slice/authSlice";
 // import { Fragment } from 'react'
 // import { Disclosure, Menu, Transition } from '@headlessui/react'
 // import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-
 export default function Navbar() {
   const { users } = useSelector((state) => state.authSlice);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
-
   const logout = () => {
     dispatch(setToken(null));
     navigate("/");
   };
-
   return (
     <div>
       <div>
@@ -27,7 +24,6 @@ export default function Navbar() {
         >
           Home
         </button>
-
         {!token && (
           <>
             <button
@@ -37,7 +33,6 @@ export default function Navbar() {
             >
               Login
             </button>
-
             <button
               onClick={() => {
                 navigate("/auth/register");
@@ -70,13 +65,19 @@ export default function Navbar() {
             </button>
           </>
         )}
-
         <button
           onClick={() => {
             navigate("/cart");
           }}
         >
           Cart
+        </button>
+        <button
+          onClick={() => {
+            navigate("/products");
+          }}
+        >
+          Games
         </button>
       </div>
     </div>

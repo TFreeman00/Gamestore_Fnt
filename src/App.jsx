@@ -9,6 +9,7 @@ import SingleUser from "../components/SingleUser";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Account from "../components/Account";
+import EditProfile from "../components/EditProfile";
 import Cart from "../components/Cart";
 
 function App() {
@@ -19,9 +20,10 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/products" element={<AllProducts />} />
-        <Route path="/products/:productId" element={<SingleProduct />} />
+        <Route path="/products/:id" element={<SingleProduct />}>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/:id" element={<SingleUser />}></Route>
+        <Route path="/users/me/:id" element={<EditProfile />}></Route>
         <Route path="/auth/register" element={<Register />}></Route>
         <Route path="/auth/login" element={<Login />}></Route>
         <Route path="/auth/me" element={<Account />}></Route>
