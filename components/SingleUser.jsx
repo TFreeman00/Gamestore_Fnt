@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetUserQuery } from "../api/usersApi";
-// import { useGetOrdersAdminMutation } from "../api/ordersApi";
+import { useGetOrdersAdminMutation } from "../api/ordersApi";
 import { useEffect } from "react";
 
 export default function SingleUser() {
@@ -11,29 +11,29 @@ export default function SingleUser() {
   const users = useGetUserQuery({ id, token });
   const user = useSelector((state) => state.usersSlice);
 
-  // const [orders] = useGetOrdersAdminMutation();
-  // useEffect(() => {
-  //   const loadOrders = () => {
-  //     orders({ id: Number(id), token });
-  //   };
-  //   if (token) loadOrders();
-  // }, []);
+  const [orders] = useGetOrdersAdminMutation();
+  useEffect(() => {
+    const loadOrders = () => {
+      orders({ id: Number(id), token });
+    };
+    if (token) loadOrders();
+  }, []);
 
-  // const order = useSelector((state) => state.orderSlice);
-  // console.log(order.order);
+  const order = useSelector((state) => state.orderSlice);
+  console.log(order.order);
 
-  // let newOrder = [];
-  // for (let i = 0; i < order.order.length; i++) {
-  //   let totalPrice = 0;
-  //   for (let x of order.order[i].productInfo) {
-  //     totalPrice += x.productDescription.price;
-  //   }
-  //   newOrder.push({
-  //     totalPrice,
-  //     ...order.order[i],
-  //   });
-  // }
-  // console.log(newOrder);
+  let newOrder = [];
+  for (let i = 0; i < order.order.length; i++) {
+    let totalPrice = 0;
+    for (let x of order.order[i].productInfo) {
+      totalPrice += x.productDescription.price;
+    }
+    newOrder.push({
+      totalPrice,
+      ...order.order[i],
+    });
+  }
+  console.log(newOrder);
   return (
     <>
       <h2></h2>
@@ -45,7 +45,7 @@ export default function SingleUser() {
         <p>Last Name: {user?.user?.lastname}</p>
         <p>Email: {user?.user?.email}</p>
       </div>
-      {/* <div className="user-orders">
+      <div className="user-orders">
         <h2>Order History</h2>
         <hr />
         {newOrder.length &&
@@ -53,7 +53,7 @@ export default function SingleUser() {
             return (
               <div key={index}>
                 <h4>Order Number: {item.id}</h4>
-                <div>Total Price: {item.totalPrice}</div>
+                <div>Total Price: ${item.totalPrice}</div>
                 <p>{item.createdat.slice(0, item.createdat.search("T"))}</p>
                 {item.productInfo.map((itm) => {
                   return (
@@ -69,7 +69,7 @@ export default function SingleUser() {
               </div>
             );
           })}
-      </div> */}
+      </div>
     </>
   );
 }
