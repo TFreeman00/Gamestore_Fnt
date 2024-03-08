@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import gamesReducer from "../slice/productSlice";
+import gameReducer from "../slice/gameSlice";
 import { usersApi } from "./usersApi";
 import { authApi } from "./authApi";
 import usersSlice from "../slice/usersSlice";
@@ -12,11 +12,10 @@ const store = configureStore({
     authSlice,
     [usersApi.reducerPath]: usersApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
-    games: gamesReducer,
+    games: gameReducer,
   },
-  middleware: (
-    getDefaultMiddleware //allows you to use is loading
-  ) => getDefaultMiddleware().concat(usersApi.middleware, authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(usersApi.middleware, authApi.middleware),
 });
 
 export default store;

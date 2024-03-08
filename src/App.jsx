@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "../components/LandingPage";
-import AllProducts from "../components/AllProducts";
-import SingleProduct from "../components/SingleProduct";
+import AllGames from "../components/AllGames";
+import SingleGame from "../components/SingleGame";
 import Navbar from "../components/Navbar";
 import Users from "../components/Users";
 import SingleUser from "../components/SingleUser";
@@ -18,8 +18,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/products" element={<AllProducts />} />
-        <Route path="/products/:productId" element={<SingleProduct />} />
+        <Route path="/games" element={<AllGames />} />
+        <Route path="/games/:id" element={<SingleGame />} />
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/:id" element={<SingleUser />}></Route>
         <Route path="/auth/register" element={<Register />}></Route>
