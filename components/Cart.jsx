@@ -3,7 +3,6 @@ import { useDeleteCartMutation, useAddToCartMutation } from "../api/cartApi";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation } from "../api/ordersApi";
 import { Link } from "react-router-dom";
-import GameCard from "./GameCard";
 
 export default function Cart() {
   const { token } = useSelector((state) => state.authSlice);
