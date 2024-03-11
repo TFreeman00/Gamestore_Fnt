@@ -13,7 +13,6 @@ import EditProfile from "../components/EditProfile";
 import Cart from "../components/Cart";
 
 function App() {
-
   return (
     <Router>
       <Navbar />
@@ -21,6 +20,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/products" element={<AllProducts />} />
         <Route path="/products/:id" element={<SingleProduct />}>
+          {" "}
+        </Route>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/:id" element={<SingleUser />}></Route>
         <Route path="/users/me/:id" element={<EditProfile />}></Route>

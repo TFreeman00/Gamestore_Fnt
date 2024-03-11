@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRegisterUserMutation } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
+
 export default function Register() {
   const [addNewUser] = useRegisterUserMutation();
   const navigate = useNavigate();
@@ -10,14 +11,23 @@ export default function Register() {
     email: "",
     password: "",
   });
+
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (form.password.length < 7) {
+      alert("Password must contain at least 7 characters, please try again");
+      return false;
+    }
+
     const results = addNewUser(form);
     navigate("/auth/me");
   };
+
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl text-center font-bold mb-4">Register</h2>
@@ -70,7 +80,7 @@ export default function Register() {
           type="submit"
           className="bg-blue-500 text-black py-2 px-4 rounded-md hover:bg-blue-600"
         >
-          Submit
+          Register
         </button>
       </form>
     </div>
