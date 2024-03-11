@@ -3,13 +3,12 @@ import { ordersApi } from "../api/ordersApi";
 import { cartApi } from "../api/cartApi";
 import { usersApi } from "../api/usersApi";
 import { authApi } from "../api/authApi";
+import { gamesApi } from "./gamesApi";
 import orderSlice from "../slice/orderSlice";
 import cartSlice from "../slice/cartSlice";
 import usersSlice from "../slice/usersSlice";
 import authSlice from "../slice/authSlice";
-import { getAllGames } from "./GameApi";
-import gameReducer from "../slice/gameSlice";
-// import { setupListeners } from "@reduxjs/toolkit/query";
+import gameSlice from "../slice/gameSlice";
 
 const store = configureStore({
   reducer: {
@@ -17,11 +16,12 @@ const store = configureStore({
     cartSlice,
     usersSlice,
     authSlice,
-    games: gameReducer,
+    gameSlice,
     [ordersApi.reducerPath]: ordersApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [gamesApi.reducerPath]: gamesApi.reducer,
   },
 
   middleware: (
@@ -31,7 +31,8 @@ const store = configureStore({
       ordersApi.middleware,
       cartApi.middleware,
       usersApi.middleware,
-      authApi.middleware
+      authApi.middleware,
+      gamesApi.middleware
     ),
 });
 
