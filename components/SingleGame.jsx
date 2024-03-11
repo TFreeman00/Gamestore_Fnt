@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+
 function SingleProduct({ productId }) {
   // Select the specific product from the Redux store using a selector
   const product = useSelector((state) =>

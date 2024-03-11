@@ -64,7 +64,7 @@ const Navbar = () => {
             Cart
           </button>
           <button
-            onClick={() => navigate("/products")}
+            onClick={() => navigate("/games")}
             className="text-black hover:text-gray-300 bg-indigo-500 hover:bg-indigo-700 rounded-md px-4 py-2"
           >
             Games
