@@ -18,9 +18,8 @@ const GameCard = ({ game, pageType, addToCartHandler, onClick }) => {
   }
 
   const handleClick = () => {
-    // Call the onClick callback function passed from the parent component
     if (onClick) {
-      onClick(game.id);
+      onClick(game.id); // Ensure that onClick is triggered correctly with the game ID
     }
   };
 
@@ -30,7 +29,7 @@ const GameCard = ({ game, pageType, addToCartHandler, onClick }) => {
         src={game.image}
         alt={game.title}
         className={`w-full ${imageSizeClass} object-cover object-center cursor-pointer`}
-        onClick={handleClick}
+        onClick={handleClick} // Ensure that onClick is triggered on image click
       />
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-2">{game.title}</h2>
@@ -41,8 +40,8 @@ const GameCard = ({ game, pageType, addToCartHandler, onClick }) => {
           <span className="text-gray-600">Price: ${game.price}</span>
           {pageType !== "single" && (
             <button
-              onClick={() => addToCartHandler(game.id)}
-              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+              onClick={() => addToCartHandler(game.id)} // Ensure that addToCartHandler is triggered correctly with the game ID
+              className="bg-blue-500 hover:bg-blue-600 text-black py-2 px-4 rounded"
             >
               Add to Cart
             </button>

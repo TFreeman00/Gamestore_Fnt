@@ -1,22 +1,26 @@
 import React from "react";
-import GameCard from "./GameCard";
+import { useHistory } from "react-router-dom";
 
 const ParentComponent = () => {
+  const history = useHistory();
+
+  const addToCartHandler = (gameId) => {
+    console.log(`Add game with ID ${gameId} to cart`);
+    // Implement your logic to add the game to the cart
+  };
+
   const navigateToSingleGame = (gameId) => {
-    // Navigate to single game page using any preferred method
-    console.log(`Navigating to single game with ID: ${gameId}`);
+    console.log(`Navigating to SingleGame with game ID: ${gameId}`);
+    history.push(`/single/${gameId}`);
   };
 
   return (
     <div>
-      {/* Example usage of GameCard */}
       <GameCard
-        game={{ id: 123, title: "Sample Game", image: "sample.jpg", price: 10 }}
+        game={gameData} // Make sure gameData is correctly passed
         pageType="landing"
-        onClick={navigateToSingleGame}
-        addToCartHandler={(gameId) =>
-          console.log(`Adding game with ID ${gameId} to cart`)
-        }
+        addToCartHandler={addToCartHandler} // Ensure that addToCartHandler is passed
+        onClick={navigateToSingleGame} // Ensure that navigateToSingleGame is passed
       />
     </div>
   );

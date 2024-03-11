@@ -16,6 +16,16 @@ const SingleGame = () => {
     dispatch(fetchGameById(gameId));
   }, [dispatch, gameId]);
 
+  const addToCartHandler = (gameId) => {
+    console.log(`Adding game ${gameId} to cart`);
+  };
+
+  const handleClick = (gameId) => {
+    console.log(`Clicked on game ${gameId}`);
+    // Navigate to the SingleGame page for the clicked game
+    // You can implement navigation logic here
+  };
+
   return (
     <div className="container mx-auto">
       {status === "loading" ? (
@@ -23,7 +33,12 @@ const SingleGame = () => {
       ) : status === "failed" ? (
         <p>Error fetching game</p>
       ) : (
-        <GameCard game={game} pageType="single" />
+        <GameCard
+          game={game}
+          pageType="single"
+          addToCartHandler={addToCartHandler}
+          onClick={handleClick}
+        />
       )}
     </div>
   );

@@ -1,47 +1,30 @@
-import React from "react";
-import {
-  useDeleteCartMutation,
-  useGetCartQuery,
-  useAddToCartMutation,
-} from "../api/cartApi";
+import React, { useEffect } from "react";
+import { useDeleteCartMutation, useAddToCartMutation } from "../api/cartApi";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation } from "../api/ordersApi";
 import { Link } from "react-router-dom";
-import GameCard from "./GameCard"; // Import GameCard
+import GameCard from "./GameCard";
 
 export default function Cart() {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
   const { cart } = useSelector((state) => state.cartSlice);
   const [createOrder] = useCreateOrderMutation();
-  const [addToCart] = useAddToCartMutation(); // 1. Import and destructure addToCart
+  const [addToCart] = useAddToCartMutation();
 
   let totalPrice = 0;
-  let cartPrice = [];
-
-  useEffect(() => {
-    const setCart = () => {
-      const data = {
-        cart: JSON.parse(window.sessionStorage.cart),
-      };
-      setSession(data);
-    };
-    if (!token && window.sessionStorage.cart) setCart();
-  }, [token]);
 
   useEffect(() => {
     if (!token) {
-      cartPrice = session.cart;
-      cartPrice.forEach((x) => {
-        totalPrice += Number(x.productprice);
+      cart.forEach((x) => {
+        totalPrice += Number(x.productDescription.price);
       });
     } else {
-      cartPrice = cart;
-      cartPrice.forEach((x) => {
+      cart.forEach((x) => {
         totalPrice += Number(x.productDescription.price);
       });
     }
-  }, [token, cart, session]);
+  }, [token, cart]);
 
   const checkout = async () => {
     await createOrder({ token });
@@ -54,7 +37,6 @@ export default function Cart() {
     });
   };
 
-  // 3. Add function to handle adding to cart
   const addToCartHandler = (productId) => {
     addToCart({ productid: productId, token });
   };
