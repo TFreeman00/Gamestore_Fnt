@@ -14,16 +14,10 @@ export default function Cart() {
   let totalPrice = 0;
 
   useEffect(() => {
-    if (!token) {
-      cart.forEach((x) => {
-        totalPrice += Number(x.productDescription.price);
-      });
-    } else {
-      cart.forEach((x) => {
-        totalPrice += Number(x.productDescription.price);
-      });
-    }
-  }, [token, cart]);
+    cart.forEach((x) => {
+      totalPrice += Number(x.productDescription.price);
+    });
+  }, [cart]);
 
   const checkout = async () => {
     await createOrder({ token });
@@ -42,7 +36,7 @@ export default function Cart() {
 
   return (
     <div className="flex justify-center">
-      <div className="container mx-auto p-20">
+      <div className="container mx-auto p-8">
         <div className="w-full max-w-md">
           <h1 className="text-2xl font-bold mb-8">Shopping Cart</h1>
           {cart.length > 0 ? (
@@ -82,7 +76,7 @@ export default function Cart() {
                 <div>
                   <button
                     onClick={checkout}
-                    className="bg-black text-white py-2 px-4 rounded-md mr-4 hover:bg-gray-900"
+                    className="bg-black text-black py-2 px-4 rounded-md mr-4 hover:bg-gray-900"
                   >
                     Checkout
                   </button>

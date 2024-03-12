@@ -23,16 +23,19 @@ export default function Login() {
 
     if (result.error) {
       alert("Invalid login credentials");
-    } else if (!result.error && window.sessionStorage.cart) {
-      let session = JSON.parse(window.sessionStorage.cart).map((cart) => ({
-        productid: Number(cart.productid),
-        userid: result.data.user.id,
-      }));
-      cart({ cart: session, token: result.data.token });
-      window.sessionStorage.removeItem("cart");
-      window.sessionStorage.removeItem("counter");
+      navigate("/auth/login");
+    } else {
+      if (window.sessionStorage.cart) {
+        let session = JSON.parse(window.sessionStorage.cart).map((cart) => ({
+          productid: Number(cart.productid),
+          userid: result.data.user.id,
+        }));
+        cart({ cart: session, token: result.data.token });
+        window.sessionStorage.removeItem("cart");
+        window.sessionStorage.removeItem("counter");
+      }
+      navigate("/");
     }
-    result.error ? navigate("/auth/login") : navigate("/");
   };
 
   return (
