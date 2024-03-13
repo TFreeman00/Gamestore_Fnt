@@ -47,7 +47,7 @@ export default function Account() {
       </div>
       <hr />
       <div>
-        <h2>Order History:</h2>
+        <h1>Order History:</h1>
         <div>
           {newOrder.map((order, index) => {
             return (
@@ -61,7 +61,7 @@ export default function Account() {
                 {order.productInfo.map((product) => {
                   return (
                     <>
-                      <div>{product.productDescription.name}</div>
+                      <div>{product.productDescription.title}</div>
                     </>
                   );
                 })}

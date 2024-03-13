@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 export const cartApi = createApi({
   reducerPath: "cartApi",
   baseQuery: fetchBaseQuery({
@@ -30,7 +29,7 @@ export const cartApi = createApi({
     }),
     deleteCart: builder.mutation({
       //delete one item in cart
-      query: ({ id, token }) => ({
+      query: ({ productid, token }) => ({
         url: "/cart",
         method: "DELETE",
         headers: {
@@ -38,7 +37,7 @@ export const cartApi = createApi({
           Authorization: `Bearer ${token}`,
         },
         body: {
-          productid: id,
+           productid
         },
       }),
     }),
@@ -57,7 +56,6 @@ export const cartApi = createApi({
     }),
   }),
 });
-
 export const {
   useGetCartQuery,
   useAddToCartMutation,

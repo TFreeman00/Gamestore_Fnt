@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetAllGamesQuery } from "../api/gamesApi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AllGames = () => {
   const { data } = useGetAllGamesQuery(); // making api call
   const { games } = useSelector((state) => state.gameSlice); // making call to state
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("search");
 
   // State for current page
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 6;
 
+  // Function to filter games based on search query
+ const filteredGames = games.filter((game) =>
+   game.title.toLowerCase().includes((searchQuery || "").toLowerCase())
+ );
+
+
   // Logic to get games for current page
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
-  const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
+  const currentGames = filteredGames.slice(indexOfFirstGame, indexOfLastGame);
 
   // Logic for page numbers
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(games.length / gamesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(filteredGames.length / gamesPerPage); i++) {
     pageNumbers.push(i);
   }
 

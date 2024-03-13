@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { gamesApi } from "../api/gamesApi";
-
 const gameSlice = createSlice({
   name: "gameSlice",
   initialState: { games: [], game: null },
@@ -17,7 +16,6 @@ const gameSlice = createSlice({
         return { ...state, games: payload };
       }
     );
-
     builder.addMatcher(
       gamesApi.endpoints.getGameById.matchFulfilled,
       (state, { payload }) => {
@@ -25,23 +23,17 @@ const gameSlice = createSlice({
         return { ...state, game: payload };
       }
     );
-
     builder.addMatcher(
       gamesApi.endpoints.updateGame.matchFulfilled,
       (state, { payload }) => {
-        return {
-          ...state,
-          games: state.games.map((game) => {
-            if (game.id === payload.game.id) {
-              return payload.game;
-            }
-            return game;
-          }),
-        };
+        console.log(payload);
+        state.game = payload;
+        state.games = state.games.map((game) => {
+          return game.id === payload.id ? payload : game;
+        });
       }
     );
   },
 });
-
 export const { createGameSuccess } = gameSlice.actions;
 export default gameSlice.reducer;
