@@ -1,99 +1,141 @@
-import React, { useEffect } from "react";
-import { useDeleteCartMutation, useAddToCartMutation } from "../api/cartApi";
+import React, { useEffect, useState } from "react";
+import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
+// import "../src/index.css";
 import { useCreateOrderMutation } from "../api/ordersApi";
-import { Link } from "react-router-dom";
-
-export default function Cart() {
+const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
+  const getCart = useGetCartQuery({ token }); // making api call
   const { cart } = useSelector((state) => state.cartSlice);
   const [createOrder] = useCreateOrderMutation();
-  const [addToCart] = useAddToCartMutation();
-
+  const [session, setSession] = useState({ cart: [] });
   let totalPrice = 0;
-
+  let cartPrice = [];
+  // useEffect hook to perform side effects in functional components.
   useEffect(() => {
-    cart.forEach((x) => {
-      totalPrice += Number(x.productDescription.price);
-    });
-  }, [cart]);
-
+    // getCart();
+    const setCart = () => {
+      const data = {
+        cart: JSON.parse(window.sessionStorage.cart),
+      };
+      setSession(data);
+    };
+    //This checks if the User is logged in & if there's data stored in the session storage.
+    //If true setCart function is called.
+    if (!token && window.sessionStorage.cart) setCart();
+  }, []);
   const checkout = async () => {
     await createOrder({ token });
   };
-
+  console.log(cart);
+  //calculates the total price of items in the cart
+  //and defines a function to remove an item from the cart.
+  if (!token) {
+    cartPrice = session.cart;
+    cartPrice.forEach((item) => {
+      totalPrice += Number(item.price);
+    });
+    // If user NOT logged in, it calculates the total price from the cart.
+  } else {
+    cartPrice = cart;
+    cartPrice.forEach((item) => {
+      console.log(item);
+      totalPrice += Number(item.products.price);
+    });
+  }
+  //Deletes product from the session cart
   const remove = (id) => {
+    console.log(id, token);
     deleteItem({
-      id: Number(id),
+      productid: Number(id),
       token,
     });
   };
-
-  const addToCartHandler = (productId) => {
-    addToCart({ productid: productId, token });
-  };
-
   return (
-    <div className="flex justify-center">
-      <div className="container mx-auto p-8">
-        <div className="w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-8">Shopping Cart</h1>
-          {cart.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                {cart.map((item) => (
-                  <div
-                    key={item.id}
-                    className="bg-white shadow-md p-4 rounded-md flex items-center space-x-4"
-                  >
-                    <img
-                      src={item.productDescription.url}
-                      alt={item.productDescription.name}
-                      className="w-20 h-20 object-contain"
-                    />
-                    <div>
-                      <h2 className="font-semibold">
-                        {item.productDescription.name}
-                      </h2>
-                      <p className="text-gray-600">
-                        ${item.productDescription.price}
-                      </p>
-                      <button
-                        onClick={() => remove(item.productid)}
-                        className="text-sm text-red-600 hover:text-red-700"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 flex justify-between items-center">
-                <h2 className="text-lg font-semibold">
-                  Subtotal: ${totalPrice.toFixed(2)}
-                </h2>
+    //Viewing the Cart as a User
+    <>
+      <h1 className="margintop">Cart</h1>
+      <hr />
+      {/* mapping over the session Cart */}
+      {(!token && session.cart.length && (
+        <div className="cart">
+          {session.cart.map((item, index) => {
+            return (
+              <div key={index}>
+                <h3>
+                  {item.title} - ${item.price}
+                </h3>
+                <img className="imgsize" src={item.url} alt={item.title} />
                 <div>
                   <button
-                    onClick={checkout}
-                    className="bg-black text-black py-2 px-4 rounded-md mr-4 hover:bg-gray-900"
+                    //removes items and returns an updated session cart
+                    id={item.id}
+                    onClick={(e) => {
+                      if (session.cart.length === 1) {
+                        window.sessionStorage.removeItem("cart");
+                        setSession({ cart: [] });
+                        return;
+                      }
+                      const cart = [];
+                      console.log(cart, e.target.id);
+                      let check = false;
+                      for (let item of session.cart) {
+                        if (item.id === e.target.id && !check) check = true;
+                        else cart.push(item);
+                      }
+                      setSession({ cart });
+                      window.sessionStorage.setItem(
+                        "cart",
+                        JSON.stringify(cart)
+                      );
+                    }}
                   >
-                    Checkout
+                    Remove
                   </button>
-                  <Link
-                    to="/"
-                    className="bg-gray-300 text-black-800 py-2 px-4 rounded-md hover:bg-gray-400"
-                  >
-                    Continue Shopping
-                  </Link>
                 </div>
               </div>
-            </>
-          ) : (
-            <p className="text-xl">Your cart is empty.</p>
-          )}
+            );
+          })}
         </div>
-      </div>
-    </div>
+        // OR
+      )) || (
+        //Viewing the Cart as a LoggedIn User
+        <div className="cart">
+          {cart.map((cart) => {
+            //  console.log(cart)
+            return (
+              <div key={cart.id}>
+                <div>{cart.products.title}</div>
+                <img
+                  className="image"
+                  src={cart.products.image}
+                  alt={cart.products.title}
+                />
+                <div>{cart.products.price}</div>
+                <button
+                  id={cart.id}
+                  onClick={(e) => {
+                    // console.log( e.target);
+                    remove(e.target.id);
+                  }}
+                >
+                  Delete Item
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {/* displays the total price of the items in the cart */}
+      <h2>Total Price: {totalPrice.toFixed(2)}</h2>
+      {/* //If the user is logged in (token is truthy) and the cart is empty  */}
+      {token && !cart.length && <>No Items In Cart</>}
+      {/* If the user is logged in (token is truthy) and the cart has items */}
+      {token && cart.length && <button onClick={checkout}>checkout</button>}
+      {/* If the user is logged in (token is truthy) and the cart is empty  */}
+      {!token && !session.cart && <>No items</>}
+    </>
   );
-}
+};
+export default Cart;

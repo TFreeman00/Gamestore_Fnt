@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "../components/LandingPage";
 import AllGames from "../components/AllGames";
@@ -10,6 +10,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Account from "../components/Account";
 import Cart from "../components/Cart";
+import EditProfile from "../components/EditProfile";
 
 function App() {
   return (
@@ -20,11 +21,12 @@ function App() {
         <Route path="/games" element={<AllGames />} />
         <Route path="/games/:id" element={<SingleGame />} />
         <Route path="/users" element={<Users />}></Route>
-        <Route path="/users/:id" element={<SingleUser />}></Route>
-        <Route path="/auth/register" element={<Register />}></Route>
-        <Route path="/auth/login" element={<Login />}></Route>
-        <Route path="/auth/me" element={<Account />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/users/:id" element={<SingleUser />} />
+        <Route path="/users/me/:id" element={<EditProfile />} />
+        <Route path="/auth/register" element={<Register />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/me" element={<Account />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );
