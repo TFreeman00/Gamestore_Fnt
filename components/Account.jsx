@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGetOrdersCustomerQuery } from "../api/ordersApi";
+
 export default function Account() {
   const { users, token } = useSelector((state) => state.authSlice);
   const customer = useGetOrdersCustomerQuery({ token });

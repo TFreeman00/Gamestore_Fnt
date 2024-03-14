@@ -14,16 +14,6 @@ import Cart from "../components/Cart";
 import AdminDashboard from "../components/AdminDashboard";
 import EditProfile from "../components/EditProfile";
 
-function App() {
-  const authToken = window.sessionStorage.getItem("authToken");
-  const { data: userInfo, isSuccess } = useGetUserInfoQuery();
-
-  useEffect(() => {
-    // Fetch user info when authToken exists
-    if (authToken) {
-      // Fetch user info
-    }
-  }, [authToken]);
 
   return (
     <Router>
@@ -43,6 +33,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+
 
 export default App;
