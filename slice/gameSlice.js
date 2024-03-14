@@ -29,15 +29,11 @@ const gameSlice = createSlice({
     builder.addMatcher(
       gamesApi.endpoints.updateGame.matchFulfilled,
       (state, { payload }) => {
-        return {
-          ...state,
-          games: state.games.map((game) => {
-            if (game.id === payload.game.id) {
-              return payload.game;
-            }
-            return game;
-          }),
-        };
+        state.game = payload;
+        console.log(payload);
+        state.games = state.games.map((game) => {
+          return game.id === payload.id ? payload : game;
+        });
       }
     );
   },

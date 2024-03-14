@@ -3,15 +3,18 @@ import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
 // import "../src/index.css";
 import { useCreateOrderMutation } from "../api/ordersApi";
+
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
   const getCart = useGetCartQuery({ token }); // making api call
   const { cart } = useSelector((state) => state.cartSlice);
   const [createOrder] = useCreateOrderMutation();
+
   const [session, setSession] = useState({ cart: [] });
   let totalPrice = 0;
   let cartPrice = [];
+
   // useEffect hook to perform side effects in functional components.
   useEffect(() => {
     // getCart();
@@ -23,12 +26,15 @@ const Cart = () => {
     };
     //This checks if the User is logged in & if there's data stored in the session storage.
     //If true setCart function is called.
+
     if (!token && window.sessionStorage.cart) setCart();
   }, []);
+
   const checkout = async () => {
     await createOrder({ token });
   };
   console.log(cart);
+
   //calculates the total price of items in the cart
   //and defines a function to remove an item from the cart.
   if (!token) {
@@ -40,7 +46,7 @@ const Cart = () => {
   } else {
     cartPrice = cart;
     cartPrice.forEach((item) => {
-      console.log(item);
+      // console.log(item)
       totalPrice += Number(item.products.price);
     });
   }
@@ -52,6 +58,7 @@ const Cart = () => {
       token,
     });
   };
+
   return (
     //Viewing the Cart as a User
     <>
@@ -98,6 +105,7 @@ const Cart = () => {
             );
           })}
         </div>
+
         // OR
       )) || (
         //Viewing the Cart as a LoggedIn User
@@ -107,14 +115,16 @@ const Cart = () => {
             return (
               <div key={cart.id}>
                 <div>{cart.products.title}</div>
+
                 <img
                   className="image"
                   src={cart.products.image}
                   alt={cart.products.title}
                 />
-                <div>{cart.products.price}</div>
+                <div>${cart.products.price}</div>
+
                 <button
-                  id={cart.id}
+                  id={cart.productid}
                   onClick={(e) => {
                     // console.log( e.target);
                     remove(e.target.id);
@@ -127,12 +137,16 @@ const Cart = () => {
           })}
         </div>
       )}
+
       {/* displays the total price of the items in the cart */}
-      <h2>Total Price: {totalPrice.toFixed(2)}</h2>
+      <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
+
       {/* //If the user is logged in (token is truthy) and the cart is empty  */}
       {token && !cart.length && <>No Items In Cart</>}
+
       {/* If the user is logged in (token is truthy) and the cart has items */}
       {token && cart.length && <button onClick={checkout}>checkout</button>}
+
       {/* If the user is logged in (token is truthy) and the cart is empty  */}
       {!token && !session.cart && <>No items</>}
     </>

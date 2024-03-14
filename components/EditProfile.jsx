@@ -3,6 +3,7 @@ import { useUpdateUserMutation } from "../api/usersApi";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 export default function EditProfile() {
   const { id } = useParams();
   const { users, token } = useSelector((state) => state.authSlice);
@@ -19,6 +20,7 @@ export default function EditProfile() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const result = updateUser({
       id,
       firstname: form.firstname,

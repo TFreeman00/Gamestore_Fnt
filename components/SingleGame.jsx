@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import { useGetGameByIdQuery } from "../api/gamesApi";
 import { useAddToCartMutation } from "../api/cartApi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SingleGame() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data } = useGetGameByIdQuery(id);
   // console.log(data);
-  const { token } = useSelector((state) => state.authSlice);
+  const { users, token } = useSelector((state) => state.authSlice);
   const [addToCart] = useAddToCartMutation();
   const cartSession = (e) => {
     if (window.sessionStorage.cart) {
@@ -40,6 +42,7 @@ function SingleGame() {
       );
     }
   };
+
   return (
     <div className="container mx-auto p-8">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

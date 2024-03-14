@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGetOrdersCustomerQuery } from "../api/ordersApi";
-
 export default function Account() {
   const { users, token } = useSelector((state) => state.authSlice);
   const customer = useGetOrdersCustomerQuery({ token });
@@ -48,7 +47,7 @@ export default function Account() {
       </div>
       <hr />
       <div>
-        <h2>Order History:</h2>
+        <h1>Order History:</h1>
         <div>
           {newOrder.map((order, index) => {
             return (
@@ -62,7 +61,7 @@ export default function Account() {
                 {order.productInfo.map((product) => {
                   return (
                     <>
-                      <div>{product.productDescription.name}</div>
+                      <div>{product.productDescription.title}</div>
                     </>
                   );
                 })}
