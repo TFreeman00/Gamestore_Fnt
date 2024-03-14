@@ -28,19 +28,21 @@ const LandingPage = () => {
       <Hero />
       <div className="container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {randomGames.map((game) => (
-          <div key={game.id} className="bg-white shadow-md rounded-lg overflow-hidden">
+          <div
+            key={game.id}
+            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+          >
             <img
               src={game.image}
               alt={game.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-52 object-cover rounded-t-lg"
             />
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{game.title}</h2>
               <h2 className="text-gray-600 mb-2">${game.price}</h2>
-              <p className="text-gray-500 mb-4">{game.description}</p>
               <Link
                 to={`/games/${game.id}`}
-                className="text-blue-500 hover:underline"
+                className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
               >
                 See Detail
               </Link>

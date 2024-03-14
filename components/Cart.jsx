@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
-// import "../src/index.css";
+
 import { useCreateOrderMutation } from "../api/ordersApi";
+
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
@@ -12,130 +13,120 @@ const Cart = () => {
   const [session, setSession] = useState({ cart: [] });
   let totalPrice = 0;
   let cartPrice = [];
-  // useEffect hook to perform side effects in functional components.
+
   useEffect(() => {
-    // getCart();
     const setCart = () => {
       const data = {
         cart: JSON.parse(window.sessionStorage.cart),
       };
       setSession(data);
     };
-    //This checks if the User is logged in & if there's data stored in the session storage.
-    //If true setCart function is called.
     if (!token && window.sessionStorage.cart) setCart();
   }, []);
+
   const checkout = async () => {
     await createOrder({ token });
   };
-  console.log(cart);
-  //calculates the total price of items in the cart
-  //and defines a function to remove an item from the cart.
+
   if (!token) {
     cartPrice = session.cart;
     cartPrice.forEach((item) => {
       totalPrice += Number(item.price);
     });
-    // If user NOT logged in, it calculates the total price from the cart.
   } else {
     cartPrice = cart;
     cartPrice.forEach((item) => {
-      console.log(item);
       totalPrice += Number(item.products.price);
     });
   }
-  //Deletes product from the session cart
+
   const remove = (id) => {
-    console.log(id, token);
     deleteItem({
       productid: Number(id),
       token,
     });
   };
+
   return (
-    //Viewing the Cart as a User
     <>
-      <h1 className="margintop">Cart</h1>
-      <hr />
-      {/* mapping over the session Cart */}
+      <h1 className="margintop text-2xl font-semibold">Cart</h1>
+      <hr className="my-4" />
       {(!token && session.cart.length && (
-        <div className="cart">
-          {session.cart.map((item, index) => {
-            return (
-              <div key={index}>
-                <h3>
-                  {item.title} - ${item.price}
-                </h3>
-                <img className="imgsize" src={item.url} alt={item.title} />
-                <div>
-                  <button
-                    //removes items and returns an updated session cart
-                    id={item.id}
-                    onClick={(e) => {
-                      if (session.cart.length === 1) {
-                        window.sessionStorage.removeItem("cart");
-                        setSession({ cart: [] });
-                        return;
-                      }
-                      const cart = [];
-                      console.log(cart, e.target.id);
-                      let check = false;
-                      for (let item of session.cart) {
-                        if (item.id === e.target.id && !check) check = true;
-                        else cart.push(item);
-                      }
-                      setSession({ cart });
-                      window.sessionStorage.setItem(
-                        "cart",
-                        JSON.stringify(cart)
-                      );
-                    }}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {session.cart.map((item, index) => (
+            <div key={index} className="bg-gray-100 p-4 rounded-md space-y-2">
+              <h3 className="text-lg font-semibold">
+                {item.title} - ${item.price}
+              </h3>
+              <img
+                className="hw-40 object-cover"
+                src={item.url}
+                alt={item.title}
+              />
+              <button
+                id={item.id}
+                onClick={(e) => {
+                  if (session.cart.length === 1) {
+                    window.sessionStorage.removeItem("cart");
+                    setSession({ cart: [] });
+                    return;
+                  }
+                  const cart = session.cart.filter(
+                    (cartItem) => cartItem.id !== e.target.id
+                  );
+                  setSession({ cart });
+                  window.sessionStorage.setItem("cart", JSON.stringify(cart));
+                }}
+                className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
         </div>
-        // OR
       )) || (
-        //Viewing the Cart as a LoggedIn User
-        <div className="cart">
-          {cart.map((cart) => {
-            //  console.log(cart)
-            return (
-              <div key={cart.id}>
-                <div>{cart.products.title}</div>
-                <img
-                  className="image"
-                  src={cart.products.image}
-                  alt={cart.products.title}
-                />
-                <div>{cart.products.price}</div>
-                <button
-                  id={cart.id}
-                  onClick={(e) => {
-                    // console.log( e.target);
-                    remove(e.target.id);
-                  }}
-                >
-                  Delete Item
-                </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {cart.map((cartItem) => (
+            <div
+              key={cartItem.id}
+              className="bg-gray-100 p-4 rounded-md space-y-2"
+            >
+              <div className="text-lg font-semibold">
+                {cartItem.products.title}
               </div>
-            );
-          })}
+              <img
+                className="hw-40"
+                src={cartItem.products.image}
+                alt={cartItem.products.title}
+              />
+              <div>${cartItem.products.price}</div>
+              <button
+                id={cartItem.productid}
+                onClick={(e) => {
+                  remove(e.target.id);
+                }}
+                className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+              >
+                Delete Item
+              </button>
+            </div>
+          ))}
         </div>
       )}
-      {/* displays the total price of the items in the cart */}
-      <h2>Total Price: {totalPrice.toFixed(2)}</h2>
-      {/* //If the user is logged in (token is truthy) and the cart is empty  */}
-      {token && !cart.length && <>No Items In Cart</>}
-      {/* If the user is logged in (token is truthy) and the cart has items */}
-      {token && cart.length && <button onClick={checkout}>checkout</button>}
-      {/* If the user is logged in (token is truthy) and the cart is empty  */}
-      {!token && !session.cart && <>No items</>}
+      <h2 className="text-xl mt-4">Total Price: ${totalPrice.toFixed(2)}</h2>
+      {token && !cart.length && <p>No Items In Cart</p>}
+      {token && cart.length && (
+        <button
+          onClick={checkout}
+          className="hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+        >
+          Checkout
+        </button>
+      )}
+      {!token && !session.cart && <p>No items</p>}
     </>
   );
 };
+
 export default Cart;
+

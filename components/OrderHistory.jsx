@@ -48,7 +48,7 @@ export default function OrderHistory() {
               {order.productInfo.map((product) => {
                 return (
                   <>
-                    <div>{product.productDescription.name}</div>
+                    <div>{product.productDescription.title}</div>
                     {/* <img src={product.productDescription.url} alt={product.productDescription.name} /> */}
                     <div>{product.productDescription.price}</div>
                   </>
