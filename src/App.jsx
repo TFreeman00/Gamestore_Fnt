@@ -14,7 +14,7 @@ import Cart from "../components/Cart";
 import AdminDashboard from "../components/AdminDashboard";
 import EditProfile from "../components/EditProfile";
 
-
+function App() {
   return (
     <Router>
       <Navbar />
@@ -27,12 +27,12 @@ import EditProfile from "../components/EditProfile";
         <Route path="/users/:id" element={<SingleUser />} />
         <Route path="/users/me/:id" element={<EditProfile />} />
         <Route path="/auth/register" element={<Register />} />
-        <Route path="/auth/login" element={<Login />} />     
-        <Route path="/auth/me" element={<Account />} />     
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/me" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );
-
+}
 
 export default App;

@@ -5,7 +5,6 @@ import { Disclosure } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 
-
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { users } = useSelector((state) => state.authSlice);
@@ -14,16 +13,9 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(setToken(null));
-    window.sessionStorage.removeItem("authToken"); 
+    window.sessionStorage.removeItem("authToken");
     navigate("/");
   };
-
-  useEffect(() => {
-    const authToken = window.sessionStorage.getItem("authToken");
-    if (authToken) {
-      dispatch(setToken(authToken));
-    }
-  }, [dispatch]);
 
   const handleSearch = () => {
     navigate(`/games?search=${searchQuery}`);
