@@ -78,36 +78,58 @@ const AdminDashboard = () => {
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Games</h2>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded mb-4"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
           onClick={handleCreateGame}
         >
           Add Game
         </button>
         <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse">
-            <thead>
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
               <tr>
-                <th className="border-b-2 p-2">Title</th>
-                <th className="border-b-2 p-2">Genre</th>
-                <th className="border-b-2 p-2">First Release Date</th>
-                <th className="border-b-2 p-2">Image</th>
-                <th className="border-b-2 p-2">Price</th>
-                <th className="border-b-2 p-2">Trailer</th>
-                <th className="border-b-2 p-2">Description</th>
-                <th className="border-b-2 p-2">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Title
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Genre
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  First Release Date
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Image
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Price
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Trailer
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Description
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white divide-y divide-gray-200">
               {currentGames.map((game) => (
-                <tr key={game.id} className="border-b">
-                  <td className="p-2">{game.title}</td>
-                  <td className="p-2">{game.genre}</td>
-                  <td className="p-2">{game.first_release_date}</td>
-                  <td className="p-2">{game.image}</td>
-                  <td className="p-2">{game.price}</td>
-                  <td className="p-2">{game.trailer}</td>
-                  <td className="p-2">{game.description}</td>
-                  <td className="p-2">
+                <tr key={game.id} className="hover:bg-gray-100">
+                  <td className="px-6 py-4 whitespace-nowrap">{game.title}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{game.genre}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {game.first_release_date}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{game.image}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{game.price}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {game.trailer}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {game.description}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <button
                       className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-1 px-2 rounded mr-2"
                       onClick={() => handleEditGame(game)}

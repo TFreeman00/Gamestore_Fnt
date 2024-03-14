@@ -1,3 +1,4 @@
+// authApi.js
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const authApi = createApi({
@@ -24,17 +25,24 @@ export const authApi = createApi({
         method: "POST",
         body: body,
       }),
+      // Store token in session storage upon successful login
+      onSuccess: (data) => {
+        window.sessionStorage.setItem("authToken", data.token);
+      },
     }),
 
     getUserInfo: builder.query({
       // get logged in user's detail
-      query: (token) => ({
-        url: "/auth/me",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }),
+      query: () => {
+        const authToken = window.sessionStorage.getItem("authToken");
+        return {
+          url: "/auth/me",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authToken ? `Bearer ${authToken}` : "",
+          },
+        };
+      },
     }),
   }),
 });

@@ -5,28 +5,30 @@ import { useSelector } from "react-redux";
 
 function Users() {
   const { token } = useSelector((state) => state.authSlice);
-  const { data } = useGetUsersQuery({ token }); 
-  const { users } = useSelector((state) => state.usersSlice); 
+  const { data } = useGetUsersQuery({ token });
+  const { users } = useSelector((state) => state.usersSlice);
 
   return (
-    <>
-      <h1>All Users</h1>
-      <hr />
-      <div>
-        {users.map((user) => {
-          return (
-            <div key={user.id}>
-              <h2>ID: {user.id} </h2>
-              <h2>First Name: {user.firstname}</h2>
-              <h2>Last Name: {user.lastname}</h2>
-              <h2>Email: {user.email}</h2>
-              <Link to={`/users/${user.id}`}>See Detail</Link>
-              <hr />
-            </div>
-          );
-        })}
+    <div className="max-w-4xl mx-auto py-8">
+      <h1 className="text-3xl font-semibold mb-4">All Users</h1>
+      <hr className="mb-4" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {users.map((user) => (
+          <div key={user.id} className="bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-lg font-semibold mb-2">ID: {user.id}</h2>
+            <p className="text-gray-600 mb-2">First Name: {user.firstname}</p>
+            <p className="text-gray-600 mb-2">Last Name: {user.lastname}</p>
+            <p className="text-gray-600 mb-2">Email: {user.email}</p>
+            <Link
+              to={`/users/${user.id}`}
+              className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+            >
+              See Detail
+            </Link>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 

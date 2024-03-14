@@ -1,11 +1,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: [
-    "./index.html*",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  darkMode: ["selector", '[data-mode="dark"]'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
       sm: "480px",
@@ -22,6 +19,8 @@ module.exports = {
         DEFAULT: "#1fb6ff",
         dark: "#0e77bd",
         light: "#7bd7ff",
+        500: "#3b82f6",
+        700: "#1d4ed8",
       },
       purple: {
         DEFAULT: "#7e5bef",
@@ -53,6 +52,12 @@ module.exports = {
         dark: "#8492a6",
         DEFAULT: "#d3dce6",
         light: "#f0f4f8",
+        500: "#6b7280",
+        600: "#4b5563",
+        100: "#f3f4f6",
+      },
+      indigo: {
+        500: "#6366f1",
       },
     },
     fontFamily: {

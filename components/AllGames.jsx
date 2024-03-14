@@ -15,10 +15,9 @@ const AllGames = () => {
   const gamesPerPage = 6;
 
   // Function to filter games based on search query
- const filteredGames = games.filter((game) =>
-   game.title.toLowerCase().includes((searchQuery || "").toLowerCase())
- );
-
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes((searchQuery || "").toLowerCase())
+  );
 
   // Logic to get games for current page
   const indexOfLastGame = currentPage * gamesPerPage;
@@ -40,21 +39,25 @@ const AllGames = () => {
     <div>
       <div className="container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {currentGames.map((game) => (
-          <div key={game.id} className="bg-white shadow-md rounded-lg p-6">
+          <div
+            key={game.id}
+            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+          >
             <img
               src={game.image}
               alt={game.title}
-              className="w-full h-48 object-cover mb-4 rounded-lg"
+              className="w-full h-52 object-cover rounded-t-lg"
             />
-            <h2 className="text-xl font-semibold mb-2">{game.title}</h2>
-            <h2 className="text-gray-600 mb-2">${game.price}</h2>
-            <p className="text-gray-500 mb-4">{game.description}</p>
-            <Link
-              to={`/games/${game.id}`}
-              className="text-blue-500 hover:underline"
-            >
-              See Detail
-            </Link>
+            <div className="p-4">
+              <h2 className="text-xl font-semibold mb-2">{game.title}</h2>
+              <h2 className="text-gray-600 mb-2 ">{game.genre}</h2>
+              <Link
+                to={`/games/${game.id}`}
+                className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+              >
+                See Detail
+              </Link>
+            </div>
           </div>
         ))}
       </div>
@@ -64,7 +67,7 @@ const AllGames = () => {
             key={number}
             onClick={() => handleClick(number)}
             className={`mx-1 px-3 py-1 rounded-full border ${
-              currentPage === number ? "bg-gray-300" : ""
+              currentPage === number ? "bg-gray-500" : ""
             }`}
           >
             {number}

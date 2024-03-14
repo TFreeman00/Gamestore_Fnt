@@ -20,7 +20,6 @@ export default function SingleUser() {
   }, []);
 
   const order = useSelector((state) => state.orderSlice);
-  console.log(order.order);
 
   let newOrder = [];
   for (let i = 0; i < order.order.length; i++) {
@@ -33,42 +32,40 @@ export default function SingleUser() {
       ...order.order[i],
     });
   }
-  console.log(newOrder);
+
   return (
     <>
-      <h2></h2>
-      <div className="single-user">
-        <h2 className="margintop">User Details </h2>
-        <hr />
-        <h4>ID: {user?.user?.id}</h4>
-        <p>First Name: {user?.user?.firstname}</p>
-        <p>Last Name: {user?.user?.lastname}</p>
-        <p>Email: {user?.user?.email}</p>
+      <h2 className="text-3xl font-semibold mb-4">User Details</h2>
+      <div className="flex flex-col bg-white shadow-md rounded-lg p-6 mb-8">
+        <h4 className="mb-2">ID: {user?.user?.id}</h4>
+        <p className="mb-2">First Name: {user?.user?.firstname}</p>
+        <p className="mb-2">Last Name: {user?.user?.lastname}</p>
+        <p className="mb-2">Email: {user?.user?.email}</p>
       </div>
-      <div className="user-orders">
-        <h2>Order History</h2>
-        <hr />
-        {newOrder.length &&
-          newOrder.map((item, index) => {
-            return (
-              <div key={index}>
-                <h4>Order Number: {item.id}</h4>
-                <div>Total Price: ${item.totalPrice}</div>
-                <p>{item.createdat.slice(0, item.createdat.search("T"))}</p>
-                {item.productInfo.map((itm) => {
-                  return (
-                    <div key={item.id}>
-                      <h4>{itm.productDescription.name}</h4>
-                      <img
-                        className="imgsize"
-                        src={itm.productDescription.url}
-                      />
-                    </div>
-                  );
-                })}
+      <div>
+        <h2 className="text-3xl font-semibold mb-4">Order History</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {newOrder.length &&
+            newOrder.map((item, index) => (
+              <div key={index} className="bg-white shadow-md rounded-lg p-6">
+                <h4 className="mb-2">Order Number: {item.id}</h4>
+                <div className="mb-2">Total Price: ${item.totalPrice}</div>
+                <p className="mb-2">
+                  {item.createdat.slice(0, item.createdat.search("T"))}
+                </p>
+                {item.productInfo.map((itm) => (
+                  <div key={item.id} className="flex items-center">
+                    <h4 className="mr-2">{itm.productDescription.name}</h4>
+                    <img
+                      className="w-12 h-12 object-cover"
+                      src={itm.productDescription.url}
+                      alt={itm.productDescription.name}
+                    />
+                  </div>
+                ))}
               </div>
-            );
-          })}
+            ))}
+        </div>
       </div>
     </>
   );

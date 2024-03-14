@@ -95,32 +95,30 @@ function SingleGame() {
             onClick={() => {
               window.open(game?.trailer, "_blank");
             }}
-            className="relative bottom-4 left-4 text-blue-500 hover:underline bg-transparent border border-blue-500 rounded-md px-3 py-1 transition duration-300 ease-in-out"
+            className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
           >
             Watch The Trailer
           </button>
-          {!token && (
-            <button
-              id={data?.id}
-              data-target-id={data?.id}
-              data-target-title={data?.title}
-              data-target-image={data?.image}
-              data-target-price={data?.price}
-              onClick={cartSession}
-              className="absolute bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          <button
+            id={data?.id}
+            data-target-id={data?.id}
+            data-target-title={data?.title}
+            data-target-image={data?.image}
+            data-target-price={data?.price}
+            onClick={(e) => {
+              return !token
+              ? cartSession(e)
+              : addToCart({
+                productid: Number(e.target.dataset.targetId),
+                token,
+              });
+            }}
+            className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
             >
-              Add to Cart
-            </button>
-          )}
-          {token && (
-            <button
-              onClick={() => addToCart({ productid: Number(data?.id), token })}
-              className="relative bottom-4 right-4 bg-blue-500 text-black px-4 py-2 rounded-md hover:bg-blue-600"
-            >
-              Add to Cart
-            </button>
-          )}
+            Add to Cart
+          </button>
         </div>
+        <div>
         {users && users.isadmin && (
           <div className="form-container sm:col-span-2 lg:col-span-1">
             <form onSubmit={submitForm} className="form">
@@ -145,7 +143,7 @@ function SingleGame() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="first_release_date">First Release Date</label>
+                <label htmlFor="first_release_date">Release Date</label>
                 <input
                   type="text"
                   name="first_release_date"
@@ -155,57 +153,65 @@ function SingleGame() {
                 />
               </div>
               <div>
-                <label htmlFor="image">image</label>
+                <label htmlFor="image">Image</label>
                 <input
                   type="text"
                   name="image"
                   id="image"
                   onChange={updateForm}
+                  className="form-input"
                 />
               </div>
               <div>
-                <label htmlFor="price">price</label>
+                <label htmlFor="price">Price</label>
                 <input
                   type="text"
                   name="price"
                   id="price"
                   onChange={updateForm}
+                  className="form-input"
                 />
               </div>
               <div>
-                <label htmlFor="trailer">trailer</label>
+                <label htmlFor="trailer">Trailer</label>
                 <input
                   type="text"
                   name="trailer"
                   id="trailer"
                   onChange={updateForm}
+                  className="form-input"
                 />
               </div>
               <div>
-                <label htmlFor="description">description</label>
+                <label htmlFor="description">Description</label>
                 <input
                   type="text"
                   name="description"
                   id="description"
                   onChange={updateForm}
+                  className="form-input"
                 />
               </div>
               <div>
-                <label htmlFor="platform">platform</label>
+                <label htmlFor="platform">Platform</label>
                 <input
                   type="text"
                   name="platform"
                   id="platform"
                   onChange={updateForm}
+                  className="form-input"
                 />
               </div>
               {/* Other form fields */}
-              <button className="form-button" onClick={submitForm}>
+              <button
+                className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-4 py-1 transition duration-300 ease-in-out"
+                onClick={submitForm}
+              >
                 Save
               </button>
               <button
                 type="button"
-                className="form-button"
+                className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
                 onClick={() => setFormData({})}
               >
                 Cancel
@@ -213,6 +219,7 @@ function SingleGame() {
             </form>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
