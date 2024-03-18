@@ -1,3 +1,4 @@
+// cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { cartApi } from "../api/cartApi";
 import { ordersApi } from "../api/ordersApi";
@@ -9,24 +10,23 @@ const cartSlice = createSlice({
     setCart: (state, action) => {
       state.cart = action.payload;
     },
+    updateCartItemCount: (state) => {
+      state.cartItemCount = state.cart.length;
+    },
   },
 
   extraReducers: (builder) => {
     builder.addMatcher(
       cartApi.endpoints.getCart.matchFulfilled,
       (state, { payload }) => {
-        console.log(payload);
         state.cart = payload;
-        return state;
       }
     );
 
     builder.addMatcher(
       cartApi.endpoints.addToCart.matchFulfilled,
       (state, { payload }) => {
-        console.log(payload);
         state.cart = payload;
-        return state;
       }
     );
 
@@ -46,4 +46,6 @@ const cartSlice = createSlice({
     );
   },
 });
+
+export const { setCart, updateCartItemCount } = cartSlice.actions;
 export default cartSlice.reducer;

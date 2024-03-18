@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
-
 import { useCreateOrderMutation } from "../api/ordersApi";
 
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
-  const getCart = useGetCartQuery({ token }); // making api call
+  const getCart = useGetCartQuery({ token });
   const { cart } = useSelector((state) => state.cartSlice);
   const [createOrder] = useCreateOrderMutation();
   const [session, setSession] = useState({ cart: [] });
@@ -26,6 +25,14 @@ const Cart = () => {
 
   const checkout = async () => {
     await createOrder({ token });
+    window.location.href = "/checkout"; // Redirect to the checkout page
+  };
+
+  const remove = (id) => {
+    deleteItem({
+      productid: Number(id),
+      token,
+    });
   };
 
   if (!token) {
@@ -39,13 +46,6 @@ const Cart = () => {
       totalPrice += Number(item.products.price);
     });
   }
-
-  const remove = (id) => {
-    deleteItem({
-      productid: Number(id),
-      token,
-    });
-  };
 
   return (
     <>
@@ -115,18 +115,17 @@ const Cart = () => {
       )}
       <h2 className="text-xl mt-4">Total Price: ${totalPrice.toFixed(2)}</h2>
       {token && !cart.length && <p>No Items In Cart</p>}
-      {token && cart.length && (
-        <button
-          onClick={checkout}
-          className="hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
-        >
-          Checkout
-        </button>
+      <button
+        onClick={checkout}
+        className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+      >
+        Proceed to Checkout
+      </button>
+      {!token && !session.cart.length && (
+        <p>Please log in to proceed to checkout</p>
       )}
-      {!token && !session.cart && <p>No items</p>}
     </>
   );
 };
 
 export default Cart;
-
