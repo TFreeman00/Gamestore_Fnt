@@ -21,9 +21,21 @@ function Hero() {
           <p className="text-xl leading-relaxed mb-8">
             Discover a vast collection of games for every genre and platform.
           </p>
+          <div className="w-full md:w-2/3 mx-auto mb-6">
+            <iframe
+              width="960"
+              height="515"
+              src="https://www.youtube.com/embed/yBp5mXHxY94?si=9isLzRhTJjCSB5bw"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <br />
           {/* Call-to-Action Button */}
           <Link
-            to="/games" // Link to the "All Games" page
+            to="/games"
             className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
           >
             Explore Games

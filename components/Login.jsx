@@ -66,7 +66,7 @@ export default function Login() {
         </label>
         <button
           type="submit"
-          className="bg-blue-500 text-black py-2 px-4 rounded-md hover:bg-blue-600"
+          className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2 border"
         >
           Submit
         </button>

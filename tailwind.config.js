@@ -32,6 +32,9 @@ module.exports = {
         dark: "#d931a0",
         light: "#ff9ff2",
       },
+      red: {
+        500: "#ef4444",
+      },
       orange: {
         DEFAULT: "#ff7849",
         dark: "#d65230",
@@ -55,6 +58,7 @@ module.exports = {
         500: "#6b7280",
         600: "#4b5563",
         100: "#f3f4f6",
+        300: "#d1d5db",
       },
       indigo: {
         500: "#6366f1",
@@ -102,5 +106,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms")]
 };
