@@ -45,6 +45,10 @@ const Navbar = () => {
           <img src={imageUrl} alt="Icon" className="w-9 h-9 mr-2" /> VGstore
         </a>
         <div className="flex items-center space-x-4 relative">
+          {/* Greeting message for User Below */}
+          {token && (
+            <span className="text-black">Welcome! {users.firstname}</span>
+          )}
           {!token ? (
             <>
               <button

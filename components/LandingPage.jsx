@@ -23,7 +23,7 @@ const LandingPage = () => {
   return (
     <>
       <Hero />{" "}
-      <div className="container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="container mx-auto pt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {randomGames.map((game) => (
           <div
             key={game.id}
