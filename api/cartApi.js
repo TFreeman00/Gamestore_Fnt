@@ -37,7 +37,7 @@ export const cartApi = createApi({
           Authorization: `Bearer ${token}`,
         },
         body: {
-           productid
+          productid,
         },
       }),
     }),

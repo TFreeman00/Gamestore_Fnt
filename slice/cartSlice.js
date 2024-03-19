@@ -9,6 +9,9 @@ const cartSlice = createSlice({
     setCart: (state, action) => {
       state.cart = action.payload;
     },
+    updateCartItemCount: (state) => {
+      state.cartItemCount = state.cart.length;
+    },
   },
 
   extraReducers: (builder) => {
@@ -46,4 +49,6 @@ const cartSlice = createSlice({
     );
   },
 });
+
+export const { setCart, updateCartItemCount } = cartSlice.actions;
 export default cartSlice.reducer;

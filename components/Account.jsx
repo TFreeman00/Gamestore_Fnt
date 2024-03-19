@@ -36,7 +36,6 @@ export default function Account() {
             <h4 className="text-lg">First Name: {users.firstname}</h4>
             <h4 className="text-lg">Last Name: {users.lastname}</h4>
             <h4 className="text-lg">Email: {users.email}</h4>
-            <h4 className="text-lg">Password: {users.password}</h4>
             <button
               className="mt-4 px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600"
               onClick={onEdit}

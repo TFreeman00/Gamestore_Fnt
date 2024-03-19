@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
-
-import { useCreateOrderMutation } from "../api/ordersApi";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
   const getCart = useGetCartQuery({ token }); // making api call
   const { cart } = useSelector((state) => state.cartSlice);
-  const [createOrder] = useCreateOrderMutation();
+  const navigate = useNavigate();
   const [session, setSession] = useState({ cart: [] });
+
   let totalPrice = 0;
   let cartPrice = [];
 
@@ -24,10 +24,6 @@ const Cart = () => {
     if (!token && window.sessionStorage.cart) setCart();
   }, []);
 
-  const checkout = async () => {
-    await createOrder({ token });
-  };
-
   if (!token) {
     cartPrice = session.cart;
     cartPrice.forEach((item) => {
@@ -39,6 +35,10 @@ const Cart = () => {
       totalPrice += Number(item.products.price);
     });
   }
+
+  const checkout = async () => {
+    navigate("/checkout");
+  };
 
   const remove = (id) => {
     deleteItem({
@@ -115,7 +115,7 @@ const Cart = () => {
       )}
       <h2 className="text-xl mt-4">Total Price: ${totalPrice.toFixed(2)}</h2>
       {token && !cart.length && <p>No Items In Cart</p>}
-      {token && cart.length && (
+      {cart.length && (
         <button
           onClick={checkout}
           className="hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
@@ -129,4 +129,3 @@ const Cart = () => {
 };
 
 export default Cart;
-

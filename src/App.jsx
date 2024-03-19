@@ -13,6 +13,8 @@ import Account from "../components/Account";
 import Cart from "../components/Cart";
 import AdminDashboard from "../components/AdminDashboard";
 import EditProfile from "../components/EditProfile";
+import Checkout from "../components/Checkout";
+import OrderConfirmation from "../components/OrderConfirmation";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/me" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<OrderConfirmation />} />
       </Routes>
     </Router>
   );
