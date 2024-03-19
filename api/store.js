@@ -25,7 +25,7 @@ const store = configureStore({
   },
 
   middleware: (
-    getDefaultMiddleware //allows you to use is loading
+    getDefaultMiddleware 
   ) =>
     getDefaultMiddleware().concat(
       ordersApi.middleware,

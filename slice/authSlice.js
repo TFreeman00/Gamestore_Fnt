@@ -1,7 +1,6 @@
 import { authApi } from "../api/authApi";
 import { createSlice } from "@reduxjs/toolkit";
 import { usersApi } from "../api/usersApi";
-
 const authSlice = createSlice({
   name: "authSlice",
   initialState: {
@@ -19,7 +18,6 @@ const authSlice = createSlice({
       window.sessionStorage.removeItem("USER");
     },
   },
-
   extraReducers: (builder) => {
     builder.addMatcher(
       authApi.endpoints.registerUser.matchFulfilled,
@@ -29,7 +27,6 @@ const authSlice = createSlice({
         window.sessionStorage.setItem("USER", JSON.stringify({ ...payload }));
       }
     );
-
     builder.addMatcher(
       authApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
@@ -38,7 +35,6 @@ const authSlice = createSlice({
         window.sessionStorage.setItem("USER", JSON.stringify({ ...payload }));
       }
     );
-
     builder.addMatcher(
       authApi.endpoints.getUserInfo.matchFulfilled,
       (state, { payload }) => {
@@ -46,7 +42,6 @@ const authSlice = createSlice({
         return { ...state, users: payload };
       }
     );
-
     builder.addMatcher(
       // PUT
       usersApi.endpoints.updateUser.matchFulfilled,
@@ -57,6 +52,5 @@ const authSlice = createSlice({
     );
   },
 });
-
 export default authSlice.reducer;
 export const { setToken } = authSlice.actions;

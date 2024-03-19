@@ -1,3 +1,4 @@
+// cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { cartApi } from "../api/cartApi";
 import { ordersApi } from "../api/ordersApi";
@@ -40,6 +41,8 @@ const cartSlice = createSlice({
     );
   },
 });
+
+
 export const { setCart, updateCartItemCount } = cartSlice.actions;
 export default cartSlice.reducer;
 

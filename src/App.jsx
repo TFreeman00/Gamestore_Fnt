@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useGetUserInfoQuery } from "../api/authApi"; // Import the useGetUserInfoQuery hook
+import { useGetUserInfoQuery } from "../api/authApi"; 
 import LandingPage from "../components/LandingPage";
 import AllGames from "../components/AllGames";
 import SingleGame from "../components/SingleGame";
@@ -13,6 +13,11 @@ import Account from "../components/Account";
 import Cart from "../components/Cart";
 import AdminDashboard from "../components/AdminDashboard";
 import EditProfile from "../components/EditProfile";
+import Checkout from "../components/Checkout"
+import CheckoutForm from "../components/CheckoutForm"
+import Footer from "../components/Footer";
+
+
 
 function App() {
   return (
@@ -30,7 +35,10 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/me" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkoutform" element={<CheckoutForm />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

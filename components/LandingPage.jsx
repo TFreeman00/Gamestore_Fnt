@@ -3,12 +3,10 @@ import { useSelector } from "react-redux";
 import { useGetAllGamesQuery } from "../api/gamesApi";
 import { Link } from "react-router-dom";
 import Hero from "./Hero";
-
 const LandingPage = () => {
   const { data } = useGetAllGamesQuery();
   const { games } = useSelector((state) => state.gameSlice);
 
-  
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -17,12 +15,13 @@ const LandingPage = () => {
     return array;
   };
 
-
   const shuffledGames = shuffleArray([...games]);
 
  
-  const randomGames = shuffledGames.slice(0, 6);
 
+  const shuffledGames = shuffleArray([...games]);
+
+  const randomGames = shuffledGames.slice(0, 6);
   return (
     <>
       <Hero />
@@ -50,4 +49,6 @@ const LandingPage = () => {
   );
 };
 
+
 export default LandingPage;
+

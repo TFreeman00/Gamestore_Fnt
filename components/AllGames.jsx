@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetAllGamesQuery } from "../api/gamesApi";
 import { Link, useLocation } from "react-router-dom";
-
 const AllGames = () => {
+
   const { data } = useGetAllGamesQuery(); 
   const { games } = useSelector((state) => state.gameSlice); 
   const location = useLocation();
@@ -24,16 +24,28 @@ const AllGames = () => {
   const currentGames = filteredGames.slice(indexOfFirstGame, indexOfLastGame);
 
 
+  const { data } = useGetAllGamesQuery();
+  const { games } = useSelector((state) => state.gameSlice);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("search");
+  const [currentPage, setCurrentPage] = useState(1);
+  const gamesPerPage = 6;
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes((searchQuery || "").toLowerCase())
+  );
+  const indexOfLastGame = currentPage * gamesPerPage;
+  const indexOfFirstGame = indexOfLastGame - gamesPerPage;
+  const currentGames = filteredGames.slice(indexOfFirstGame, indexOfLastGame);
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(filteredGames.length / gamesPerPage); i++) {
     pageNumbers.push(i);
   }
 
- 
   const handleClick = (number) => {
     setCurrentPage(number);
   };
-
   return (
     <div>
       <div className="container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -41,7 +53,9 @@ const AllGames = () => {
           <div
             key={game.id}
             className=" bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+
           
+
           >
             <Link to={`/games/${game.id}`}>
               <img
@@ -75,4 +89,6 @@ const AllGames = () => {
   );
 };
 
+
 export default AllGames;
+

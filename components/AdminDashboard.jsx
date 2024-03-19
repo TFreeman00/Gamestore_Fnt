@@ -1,6 +1,11 @@
+
 import { useState } from "react";
+
+import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
 import { useCreateGameMutation } from "../api/gamesApi";
+
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const [createGame] = useCreateGameMutation();
@@ -15,8 +20,10 @@ const AdminDashboard = () => {
     description: "",
     platform: "",
   });
+
   const updateForm = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const submitForm = async (e) => {
     e.preventDefault();
     const result = await createGame({
@@ -25,6 +32,7 @@ const AdminDashboard = () => {
     });
     console.log(result);
   };
+
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <h1 className="text-3xl font-bold mb-8 text-center">Add New Game</h1>
@@ -135,4 +143,9 @@ const AdminDashboard = () => {
     </div>
   );
 };
+
 export default AdminDashboard;
+
+
+
+
