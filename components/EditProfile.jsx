@@ -64,7 +64,7 @@ export default function EditProfile() {
               className="block w-full py-2 px-3 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1"
             ></input>
           </label>
-          <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+          <button className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out">
             Submit
           </button>
         </form>

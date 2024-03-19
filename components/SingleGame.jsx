@@ -13,41 +13,33 @@ function SingleGame() {
   const { users, token } = useSelector((state) => state.authSlice);
   const [showNotification, setShowNotification] = useState(false);
 
-  const cartSession = (e) => {
-    if (window.sessionStorage.cart) {
-      //get cart
-      const cart = JSON.parse(window.sessionStorage.cart);
-      //add item into cart
-      cart.push({
-        id: e.target.dataset.targetId,
-        title: e.target.dataset.targetTitle,
-        url: e.target.dataset.targetImage,
-        price: e.target.dataset.targetPrice,
-      });
-      //update cart with new item
-      window.sessionStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      //create cart
-      window.sessionStorage.setItem(
-        "cart",
-        JSON.stringify([
-          {
-            id: e.target.dataset.targetId,
-            title: e.target.dataset.targetTitle,
-            url: e.target.dataset.targetImage,
-            price: e.target.dataset.targetPrice,
-          },
-        ])
-      );
-    }
-  };
-
-  const handleAddToCart = (e) => {
+  const handleAddToCart = () => {
     if (!token) {
-      window.alert("Please log in or register to continue.");
+      if (window.sessionStorage.cart) {
+        const cart = JSON.parse(window.sessionStorage.cart);
+        cart.push({
+          id: data?.id,
+          title: data?.title,
+          url: data?.image,
+          price: data?.price,
+        });
+        window.sessionStorage.setItem("cart", JSON.stringify(cart));
+      } else {
+        window.sessionStorage.setItem(
+          "cart",
+          JSON.stringify([
+            {
+              id: data?.id,
+              title: data?.title,
+              url: data?.image,
+              price: data?.price,
+            },
+          ])
+        );
+      }
     } else {
       addToCart({
-        productid: Number(e.target.dataset.targetId),
+        productid: Number(data?.id),
         token,
       })
         .then(() => {
@@ -95,170 +87,16 @@ function SingleGame() {
             Watch The Trailer
           </button>
           <button
-
-  id={data?.id}
-  data-target-id={data?.id}
-  data-target-title={data?.title}
-  data-target-image={data?.image}
-  data-target-price={data?.price}
-  onClick={(e) => {
-    if (!token) {
-      cartSession(e);
-    } else {
-      addToCart({
-        productid: Number(e.target.dataset.targetId),
-        token,
-      })
-        .then(() => {
-          setShowNotification(true); // Drop down Notification
-          setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3sec
-        })
-        .catch((error) => {
-          console.error("Error adding to cart:", error);
-          // Handle errors, display an error message to the user
-        });
-    }
-  }}
-  className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
->
-  Add to Cart
-</button>
-{showNotification && (
-
-            id={data?.id}
-            data-target-id={data?.id}
-            data-target-title={data?.title}
-            data-target-image={data?.image}
-            data-target-price={data?.price}
             onClick={handleAddToCart}
             className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
           >
             Add to Cart
           </button>
           {showNotification && (
-
             <div className="dropdown-notification">Item added to cart</div>
           )}
         </div>
         <div>
-
-        {users && users.isadmin && (
-        <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Edit Game</h1>
-      <form onSubmit={submitForm} className="mb-8">
-        <div className="mb-4">
-          <label htmlFor="title" className="block mb-2">
-            Title
-          </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="genre" className="block mb-2">
-            Genre
-          </label>
-          <input
-            type="text"
-            name="genre"
-            id="genre"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="first_release_date" className="block mb-2">
-            First Release Date
-          </label>
-          <input
-            type="text"
-            name="first_release_date"
-            id="first_release_date"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="image" className="block mb-2">
-            Image
-          </label>
-          <input
-            type="text"
-            name="image"
-            id="image"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="price" className="block mb-2">
-            Price
-          </label>
-          <input
-            type="text"
-            name="price"
-            id="price"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="trailer" className="block mb-2">
-            Trailer
-          </label>
-          <input
-            type="text"
-            name="trailer"
-            id="trailer"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="description" className="block mb-2">
-            Description
-          </label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="platform" className="block mb-2">
-            Platform
-          </label>
-          <input
-            type="text"
-            name="platform"
-            id="platform"
-            onChange={updateForm}
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <button
-          type="submit"
-          className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
-        >
-          Submit
-        </button>
-        <button
-                type="button"
-                className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
-                onClick={() => setFormData({})}
-              >
-                Cancel
-              </button>
-      </form>
-    </div>
-        )}
-
           {users && users.isadmin && (
             <div className="container mx-auto px-4 py-8">
               <h1 className="text-3xl font-bold mb-8 text-center">Edit Game</h1>
@@ -272,4 +110,3 @@ function SingleGame() {
 }
 
 export default SingleGame;
-
