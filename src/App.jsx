@@ -15,6 +15,7 @@ import AdminDashboard from "../components/AdminDashboard";
 import EditProfile from "../components/EditProfile";
 import Checkout from "../components/Checkout"
 import CheckoutForm from "../components/CheckoutForm"
+import Footer from "../components/Footer";
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkoutform" element={<CheckoutForm />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

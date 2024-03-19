@@ -25,7 +25,7 @@ const Cart = () => {
 
   const checkout = async () => {
     await createOrder({ token });
-    window.location.href = "/checkout"; // Redirect to the checkout page
+    window.location.href = "/checkout"; 
   };
 
   const remove = (id) => {

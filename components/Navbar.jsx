@@ -7,6 +7,8 @@ import {
 } from "@heroicons/react/20/solid";
 import { setToken } from "../slice/authSlice";
 import { updateCartItemCount } from "../slice/cartSlice";
+import { Ripple, initTWE } from "tw-elements";
+initTWE({ Ripple });
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,7 +21,7 @@ const Navbar = () => {
   }));
 
   useEffect(() => {
-    dispatch(updateCartItemCount()); 
+    dispatch(updateCartItemCount());
   }, [dispatch]);
 
   const logout = () => {

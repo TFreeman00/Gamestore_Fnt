@@ -235,7 +235,7 @@ function SingleGame() {
                 </button>
                 <button
                   type="button"
-                  className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
                   onClick={() => setFormData({})}
                 >
                   Cancel
