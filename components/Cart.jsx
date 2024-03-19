@@ -118,7 +118,7 @@ const Cart = () => {
       {token && cart.length && (
         <button
           onClick={checkout}
-          className="hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+          className="hover:bg-blue hover:text-black bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
         >
           Checkout
         </button>

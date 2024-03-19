@@ -4,10 +4,19 @@ import { usersApi } from "../api/usersApi";
 
 const authSlice = createSlice({
   name: "authSlice",
-  initialState: { users: null, token: null },
+  initialState: {
+    users: window.sessionStorage.getItem("USER")
+      ? JSON.parse(window.sessionStorage.getItem("USER")).user
+      : null,
+    token: window.sessionStorage.getItem("USER")
+      ? JSON.parse(window.sessionStorage.getItem("USER")).token
+      : null,
+  },
+
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
+      window.sessionStorage.removeItem("USER");
     },
   },
 
@@ -15,18 +24,18 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.registerUser.matchFulfilled,
       (state, { payload }) => {
-        console.log(payload);
         state.users = payload.user;
         state.token = payload.token;
+        window.sessionStorage.setItem("USER", JSON.stringify({ ...payload }));
       }
     );
 
     builder.addMatcher(
       authApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
-        console.log(payload);
         state.users = payload.user;
         state.token = payload.token;
+        window.sessionStorage.setItem("USER", JSON.stringify({ ...payload }));
       }
     );
 
