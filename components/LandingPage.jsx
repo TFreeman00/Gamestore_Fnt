@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useGetAllGamesQuery } from "../api/gamesApi";
 import { Link } from "react-router-dom";
 import Hero from "./Hero";
+
 const LandingPage = () => {
   const { data } = useGetAllGamesQuery();
   const { games } = useSelector((state) => state.gameSlice);
@@ -17,14 +18,11 @@ const LandingPage = () => {
 
   const shuffledGames = shuffleArray([...games]);
 
- 
-
-  const shuffledGames = shuffleArray([...games]);
-
   const randomGames = shuffledGames.slice(0, 6);
+
   return (
     <>
-      <Hero />
+      <Hero />{" "}
       <div className="container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {randomGames.map((game) => (
           <div
@@ -49,6 +47,4 @@ const LandingPage = () => {
   );
 };
 
-
 export default LandingPage;
-

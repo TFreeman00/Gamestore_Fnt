@@ -26,19 +26,20 @@ export default function Account() {
   };
 
   return (
-    <>
-      <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-md mx-auto mt-8 bg-white shadow-md rounded-lg p-6">
         {users && (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Account Details </h2>
+            <h2 className="text-2xl font-bold mb-4">Account Details</h2>
             <hr className="my-4" />
-            <h4 className="text-lg">Id: {users.id}</h4>
-            <h4 className="text-lg">First Name: {users.firstname}</h4>
-            <h4 className="text-lg">Last Name: {users.lastname}</h4>
-            <h4 className="text-lg">Email: {users.email}</h4>
-            <h4 className="text-lg">Password: {users.password}</h4>
+            <div className="mb-4">
+              <h4 className="text-lg">Id: {users.id}</h4>
+              <h4 className="text-lg">First Name: {users.firstname}</h4>
+              <h4 className="text-lg">Last Name: {users.lastname}</h4>
+              <h4 className="text-lg">Email: {users.email}</h4>
+            </div>
             <button
-              className="mt-4 px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600"
+              className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
               onClick={onEdit}
             >
               Edit
@@ -46,32 +47,29 @@ export default function Account() {
           </div>
         )}
       </div>
-      <hr />
+      <hr className="my-8" />
       <div>
-        <h1>Order History:</h1>
+        <h1 className="text-2xl font-bold mb-4">Order History</h1>
         <div>
           {newOrder.map((order, index) => {
             return (
-              <div key={index}>
-                <div>Order Number: {order.id}</div>
-                <div>
+              <div key={index} className="mb-8">
+                <div className="mb-2">Order Number: {order.id}</div>
+                <div className="mb-2">
                   Order Placed:{" "}
                   {order.createdat.slice(0, order.createdat.search("T"))}
-                  <div>Total Price: ${order.totalPrice}</div>
                 </div>
-                {order.productInfo.map((product) => {
-                  return (
-                    <>
-                      <div>{product.productDescription.title}</div>
-                    </>
-                  );
-                })}
-                <hr />
+                <div className="mb-2">Total Price: ${order.totalPrice}</div>
+                {order.productInfo.map((product, index) => (
+                  <div key={index} className="mb-2">
+                    {product.productDescription.title}
+                  </div>
+                ))}
               </div>
             );
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
