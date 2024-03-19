@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
-import { useCreateOrderMutation } from "../api/ordersApi";
-
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
-  const getCart = useGetCartQuery({ token });
+  const getCart = useGetCartQuery({ token }); // making api call
   const { cart } = useSelector((state) => state.cartSlice);
-  const [createOrder] = useCreateOrderMutation();
+  const navigate = useNavigate();
   const [session, setSession] = useState({ cart: [] });
   let totalPrice = 0;
   let cartPrice = [];
-
   useEffect(() => {
     const setCart = () => {
       const data = {
@@ -22,19 +20,6 @@ const Cart = () => {
     };
     if (!token && window.sessionStorage.cart) setCart();
   }, []);
-
-  const checkout = async () => {
-    await createOrder({ token });
-    window.location.href = "/checkout"; 
-  };
-
-  const remove = (id) => {
-    deleteItem({
-      productid: Number(id),
-      token,
-    });
-  };
-
   if (!token) {
     cartPrice = session.cart;
     cartPrice.forEach((item) => {
@@ -46,6 +31,15 @@ const Cart = () => {
       totalPrice += Number(item.products.price);
     });
   }
+  const checkout = async () => {
+    navigate("/checkout");
+  };
+  const remove = (id) => {
+    deleteItem({
+      productid: Number(id),
+      token,
+    });
+  };
 
   return (
     <>

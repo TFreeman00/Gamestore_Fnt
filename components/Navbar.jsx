@@ -7,8 +7,9 @@ import {
 } from "@heroicons/react/20/solid";
 import { setToken } from "../slice/authSlice";
 import { updateCartItemCount } from "../slice/cartSlice";
-import { Ripple, initTWE } from "tw-elements";
-initTWE({ Ripple });
+
+const imageUrl =
+  "https://cdn.leonardo.ai/users/2ca1195f-47ce-42dd-9179-f8d8269808f8/generations/bb35b511-42c3-4289-b73e-0a73df123d3d/variations/Default_A_cute_video_game_store_mascot_masterfully_crafted_Hi_0_bb35b511-42c3-4289-b73e-0a73df123d3d_0.png";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,12 +37,12 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow">
-      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8 flex justify-between items-center bg-">
+      <div className="container mx-auto px-4 lg:px-8 flex justify-between items-center">
         <a
           href="/"
-          className="text-black font-bold text-lg hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+          className="text-black font-bold text-lg hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2 flex items-center"
         >
-          GameStore
+          <img src={imageUrl} alt="Icon" className="w-9 h-9 mr-2" /> VGstore
         </a>
         <div className="flex items-center space-x-4 relative">
           {!token ? (
@@ -102,7 +103,7 @@ const Navbar = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search..."
-            className="block w-64 sm:w-80 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500"
+            className="block w-40 sm:w-64 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500"
           />
           <button
             onClick={handleSearch}
