@@ -1281,6 +1281,12 @@ textarea::placeholder {
   color: #d1d5db;
 }
 
+@media (min-width: 480px) {
+  .sm\:h-5 {
+    height: 1.25rem/* 20px */;
+  }
+}
+
 .w-9 {
   /* 36px */
   width: 2.25rem;
@@ -1340,6 +1346,8 @@ textarea::placeholder {
 .bg-gray-500 {
   background-color: #6b7280;
 }
+
+
 
 /* animations */
 /* pulse */

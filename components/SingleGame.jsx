@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetGameByIdQuery, useUpdateGameMutation } from "../api/gamesApi";
 import { useAddToCartMutation } from "../api/cartApi";
@@ -12,31 +12,12 @@ function SingleGame() {
   const { game } = useSelector((state) => state.gameSlice);
   const { users, token } = useSelector((state) => state.authSlice);
   const [showNotification, setShowNotification] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     if (!token) {
-      if (window.sessionStorage.cart) {
-        const cart = JSON.parse(window.sessionStorage.cart);
-        cart.push({
-          id: data?.id,
-          title: data?.title,
-          url: data?.image,
-          price: data?.price,
-        });
-        window.sessionStorage.setItem("cart", JSON.stringify(cart));
-      } else {
-        window.sessionStorage.setItem(
-          "cart",
-          JSON.stringify([
-            {
-              id: data?.id,
-              title: data?.title,
-              url: data?.image,
-              price: data?.price,
-            },
-          ])
-        );
-      }
+      setShowLoginPopup(true);
     } else {
       addToCart({
         productid: Number(data?.id),
@@ -94,6 +75,34 @@ function SingleGame() {
           </button>
           {showNotification && (
             <div className="dropdown-notification">Item added to cart</div>
+          )}
+          {/* Login popup */}
+          {showLoginPopup && (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+              <div className="bg-white p-8 rounded-md shadow-md">
+                <h2 className="text-lg font-semibold mb-4">
+                  Please log in or register
+                </h2>
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => {
+                      navigate("/auth/login")
+                    }}
+                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  >
+                    Log In
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate("/auth/register");
+                    }}
+                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
         </div>
         <div>
