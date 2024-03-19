@@ -22,7 +22,11 @@ const Navbar = () => {
   }));
 
   useEffect(() => {
+
+    dispatch(updateCartItemCount()); 
+
     dispatch(updateCartItemCount());
+
   }, [dispatch]);
 
   const logout = () => {

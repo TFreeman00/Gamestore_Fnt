@@ -11,6 +11,7 @@ const authSlice = createSlice({
       ? JSON.parse(window.sessionStorage.getItem("USER")).token
       : null,
   },
+
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;

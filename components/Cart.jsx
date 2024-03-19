@@ -109,6 +109,15 @@ const Cart = () => {
       )}
       <h2 className="text-xl mt-4">Total Price: ${totalPrice.toFixed(2)}</h2>
       {token && !cart.length && <p>No Items In Cart</p>}
+
+      {token && cart.length && (
+        <button
+          onClick={checkout}
+          className="hover:bg-blue hover:text-black bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+        >
+          Checkout
+        </button>
+
       <button
         onClick={checkout}
         className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
@@ -117,6 +126,7 @@ const Cart = () => {
       </button>
       {!token && !session.cart.length && (
         <p>Please log in to proceed to checkout</p>
+
       )}
     </>
   );
