@@ -12,9 +12,9 @@ import Register from "../components/Register";
 import Account from "../components/Account";
 import Cart from "../components/Cart";
 import AdminDashboard from "../components/AdminDashboard";
+import OrderConfirmation from "../components/OrderConfirmation";
 import EditProfile from "../components/EditProfile";
 import Checkout from "../components/Checkout"
-import CheckoutForm from "../components/CheckoutForm"
 import Footer from "../components/Footer";
 
 
@@ -36,7 +36,7 @@ function App() {
         <Route path="/auth/me" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/checkoutform" element={<CheckoutForm />} />
+        <Route path="/confirmation" element={<OrderConfirmation />} />
       </Routes>
       <Footer />
     </Router>
