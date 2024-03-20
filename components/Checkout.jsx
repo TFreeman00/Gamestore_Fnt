@@ -47,11 +47,11 @@ const Checkout = () => {
                   </h2>
                   <Disclosure.Button className="mb-8 font-medium text-indigo-600 hover:text-indigo-500">
                     {open ? (
-                      <span className="text-lg font-medium text-gray-900">
+                      <span className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out">
                         Hide full summary
                       </span>
                     ) : (
-                      <span className="ml-8 text-lg font-medium text-gray-900">
+                      <span className="frelative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out">
                         Show full summary
                       </span>
                     )}
@@ -67,7 +67,7 @@ const Checkout = () => {
                         <img
                           src={item?.products?.image}
                           alt={item?.products?.title}
-                          className="h-40 w-40 mt-4 flex-none rounded-md bg-gray-200 object-cover object-center"
+                          className="h-40 w-4 mt-4 flex-none rounded-md bg-gray-200 object-cover object-center"
                         />
                         <div className="flex flex-col justify-between space-y-4">
                           <div className="space-y-1 text-sm font-medium">
@@ -105,7 +105,6 @@ const Checkout = () => {
                 </p>
               </>
             )}
-            New 4:09
           </Disclosure>
         </section>
         {/* Order summary */}
