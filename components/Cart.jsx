@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
-  const getCart = useGetCartQuery({ token }); // making api call
+  const getCart = useGetCartQuery({ token }); 
   const { cart } = useSelector((state) => state.cartSlice);
   const navigate = useNavigate();
   const [session, setSession] = useState({ cart: [] });
@@ -52,7 +52,7 @@ const Cart = () => {
                 {item.title} - ${item.price}
               </h3>
               <img
-                className="hw-40 object-cover"
+                className="h-40 w-40 object-cover"
                 src={item.url}
                 alt={item.title}
               />

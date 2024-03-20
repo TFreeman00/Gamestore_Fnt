@@ -33,13 +33,13 @@ export default function Account() {
             <h2 className="text-2xl font-bold mb-4">Account Details</h2>
             <hr className="my-4" />
             <div className="mb-4">
-              <h4 className="text-lg">Id: {users.id}</h4>
-              <h4 className="text-lg">First Name: {users.firstname}</h4>
-              <h4 className="text-lg">Last Name: {users.lastname}</h4>
-              <h4 className="text-lg">Email: {users.email}</h4>
+              <h4 className="text-lg mb-2">Id: {users.id}</h4>
+              <h4 className="text-lg mb-2">First Name: {users.firstname}</h4>
+              <h4 className="text-lg mb-2">Last Name: {users.lastname}</h4>
+              <h4 className="text-lg mb-2">Email: {users.email}</h4>
             </div>
             <button
-              className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+              className="text-black hover:bg-blue-500 hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
               onClick={onEdit}
             >
               Edit
