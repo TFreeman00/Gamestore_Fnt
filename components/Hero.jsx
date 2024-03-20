@@ -5,7 +5,7 @@ function Hero() {
   return (
     <section className="hero bg-cover bg-center relative">
       <img
-        src="https://cdn.leonardo.ai/users/2ca1195f-47ce-42dd-9179-f8d8269808f8/generations/8dfd10b5-d995-4ae5-9592-365e8927eddb/Default_Super_Mario_world_game_cover_0.jpg"
+        src="https://getwallpapers.com/wallpaper/full/1/d/f/1088927-beautiful-cool-gaming-backgrounds-1920x1080-for-iphone-6.jpg"
         alt="Hero image"
         className="w-full h-full object-cover absolute opacity-25"
       />

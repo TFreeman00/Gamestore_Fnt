@@ -22,8 +22,22 @@ const Navbar = () => {
   }));
 
   useEffect(() => {
-    dispatch(updateCartItemCount()); 
+    dispatch(updateCartItemCount());
   }, [dispatch]);
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        handleSearch();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []); // Empty dependency array ensures that this effect runs only once
 
   const logout = () => {
     dispatch(setToken(null));
@@ -47,19 +61,21 @@ const Navbar = () => {
         <div className="flex items-center space-x-4 relative">
           {/* Greeting message for User Below */}
           {token && (
-            <span className="text-black">Welcome! {users.firstname}</span>
+            <span className="hidden sm:inline text-black">
+              Welcome! {users.firstname}
+            </span>
           )}
           {!token ? (
             <>
               <button
                 onClick={() => navigate("/auth/login")}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
               >
                 Login
               </button>
               <button
                 onClick={() => navigate("/auth/register")}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
               >
                 Register
               </button>
@@ -68,13 +84,13 @@ const Navbar = () => {
             <>
               <button
                 onClick={() => navigate("/auth/me")}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
               >
                 Account
               </button>
               <button
                 onClick={logout}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
               >
                 Logout
               </button>
@@ -83,7 +99,7 @@ const Navbar = () => {
           {token && users.isadmin && (
             <button
               onClick={() => navigate("/users")}
-              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
             >
               User
             </button>
@@ -91,37 +107,44 @@ const Navbar = () => {
           {token && users.isadmin && (
             <button
               onClick={() => navigate("/admin")}
-              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
             >
               Admin Dashboard
             </button>
           )}
           <button
             onClick={() => navigate("/games")}
-            className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2"
+            className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
           >
             Games
           </button>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search..."
-            className="block w-40 sm:w-64 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500"
-          />
-          <button
-            onClick={handleSearch}
-            className="relative inset-y-0 right-0 flex items-center justify-center px-4 text-gray-600 bg-white"
-          >
-            <MagnifyingGlassIcon className="h-5 w-5" />
-          </button>
+          <div className="relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+              placeholder="Search..."
+              className="block w-32 sm:w-40 px-2 py-2 sm:px-4 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500"
+            />
+            <button
+              onClick={handleSearch}
+              className="absolute inset-y-0 right-0 flex items-center justify-right px-4 text-gray-600 bg-transparent"
+            >
+              <MagnifyingGlassIcon className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         <button
           onClick={() => navigate("/cart")}
-          className="text-black hover:text-gray-300 bg-gray duration-300 rounded-md px-4 py-2 relative"
+          className="text-black hover:text-gray-300 bg-gray duration-300 rounded-md px-2 py-2 sm:px-4 relative"
         >
-          <ShoppingCartIcon className="h-6 w-6" />
-          <span className="absolute top-0 right-0 mt-1 mr-1 text-blue-500 rounded-full px-2 py-1 text-lg">
+          <ShoppingCartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+          <span className="absolute top-0 right-0 mt-0.5 mr-0.5 text-blue-500 rounded-full px-1.5 sm:px-2 py-0.5 text-xs sm:text-lg">
             {cart.length}
           </span>
         </button>

@@ -238,8 +238,6 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button;
-  /* 1 */
   background-color: transparent;
   /* 2 */
   background-image: none;
@@ -285,8 +283,6 @@ Correct the cursor style of increment and decrement buttons in Safari.
 */
 
 [type="search"] {
-  -webkit-appearance: textfield;
-  /* 1 */
   outline-offset: -2px;
   /* 2 */
 }
@@ -426,7 +422,6 @@ embed,
 object {
   display: block;
   /* 1 */
-  vertical-align: middle;
   /* 2 */
 }
 
@@ -926,6 +921,10 @@ textarea::placeholder {
 .hidden {
   display: none;
 }
+.h-40 {
+  height: 10rem/* 160px */;
+}
+
 
 .h-48 {
   height: 12rem;
@@ -949,6 +948,10 @@ textarea::placeholder {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-40 {
+  width: 12rem;
 }
 
 .w-5 {
@@ -1281,6 +1284,29 @@ textarea::placeholder {
   color: #d1d5db;
 }
 
+/* Footer */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+
+@media (min-width: 480px) {
+  .sm\:h-5 {
+    height: 1.25rem;
+  }
+}
+
 .w-9 {
   /* 36px */
   width: 2.25rem;
@@ -1295,10 +1321,10 @@ textarea::placeholder {
 }
 
 .h-6 {
-  height: 1.5rem/* 24px */;
+  height: 1.5rem;
 }
 .w-6 {
-  width: 1.5rem/* 24px */;
+  width: 1.5rem;
 }
 
 .text-blue-500 {
@@ -1340,6 +1366,8 @@ textarea::placeholder {
 .bg-gray-500 {
   background-color: #6b7280;
 }
+
+
 
 /* animations */
 /* pulse */

@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-black text-center p-4 absolute bottom-0 w-full">
+    <footer className="bg-gray-800 text-black text-center p-4">
       <div className="container mx-auto">
         <p className="text-sm">
           &copy; Video Game Store {new Date().getFullYear()}
