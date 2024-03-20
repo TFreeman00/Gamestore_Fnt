@@ -25,12 +25,15 @@ const Checkout = () => {
   };
   return (
     <>
-      <main className="lg:flex lg:min-h-full lg:flex-row-reverse lg:overflow-hidden">
-        <h1 className="sr-only">Checkout</h1>
-        {/* Mobile order summary */}
+      <main className="flex flex-col items-center justify-center  h-full">
+        <div className="flex items-center justify-center h-full">
+          <h1 className="mt-8 mb-4 text-3xl lg:text-2xl font-bold text-center">
+            Check out
+          </h1>
+        </div>
         <section
           aria-labelledby="order-heading"
-          className="bg-gray-50 px-4 py-6 sm:px-6 lg:hidden"
+          className="mt-4 bg-gray-50 px-4 py-6 sm:px-6 lg:hidden"
         >
           <Disclosure as="div" className="mx-auto max-w-lg">
             {({ open }) => (
@@ -38,11 +41,11 @@ const Checkout = () => {
                 <div className="flex items-center justify-between">
                   <h2
                     id="order-heading"
-                    className="text-lg font-medium text-gray-900"
+                    className="mb-8 text-lg font-medium text-gray-900"
                   >
                     Your Order
                   </h2>
-                  <Disclosure.Button className="font-medium text-indigo-600 hover:text-indigo-500">
+                  <Disclosure.Button className="mb-8 font-medium text-indigo-600 hover:text-indigo-500">
                     {open ? (
                       <span>Hide full summary</span>
                     ) : (
@@ -53,14 +56,14 @@ const Checkout = () => {
                 <Disclosure.Panel>
                   <ul
                     role="list"
-                    className="divide-y divide-gray-200 border-b border-gray-200"
+                    className="mb-8 divide-y divide-gray-200 border-b border-gray-200"
                   >
                     {cart.map((item, idx) => (
-                      <li key={idx} className="flex space-x-6 py-6">
+                      <li key={idx} className="mb-8 flex space-x-6 py-6">
                         <img
                           src={item?.products?.image}
                           alt={item?.products?.title}
-                          className="h-40 w-40 flex-none rounded-md bg-gray-200 object-cover object-center"
+                          className="h-40 w-40 mt-4 flex-none rounded-md bg-gray-200 object-cover object-center"
                         />
                         <div className="flex flex-col justify-between space-y-4">
                           <div className="space-y-1 text-sm font-medium">
@@ -78,17 +81,17 @@ const Checkout = () => {
                   <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
                     <div className="flex justify-between">
                       <dt>Subtotal</dt>
-                      <dd className="text-gray-900">${subtotal.toFixed(2)}</dd>
+                      <dd className="text-l lg:text-2xl font-bold text-center">${subtotal.toFixed(2)}</dd>
                     </div>
                     <div className="flex justify-between">
                       <dt>Taxes</dt>
-                      <dd className="text-gray-900">${taxes}</dd>
+                      <dd className="text-l lg:text-2xl font-bold text-centertext-gray-900">${taxes}</dd>
                     </div>
                   </dl>
                 </Disclosure.Panel>
                 <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
                   <span className="text-base">Total</span>
-                  <span className="text-base">${total.toFixed(2)}</span>
+                  <span className="text-xl lg:text-2xl font-bold text-center">${total.toFixed(2)}</span>
                 </p>
               </>
             )}
@@ -107,11 +110,12 @@ const Checkout = () => {
             className="flex-auto divide-y divide-gray-200 overflow-y-auto px-6"
           >
             {cart.map((item) => (
-              <li key={item.id} className="flex space-x-6 py-6">
+              <li key={item.id} className=" flex space-x-6 py-6">
+                
                 <img
                   src={item?.products?.image}
                   alt={item?.products?.title}
-                  className="h-40 w-40 flex-none rounded-md bg-gray-200 object-cover object-center"
+                  className=""
                 />
                 <div className="flex flex-col justify-between space-y-4">
                   <div className="space-y-1 text-sm font-medium">
@@ -123,7 +127,7 @@ const Checkout = () => {
             ))}
           </ul>
           <div className="sticky bottom-0 flex-none border-t border-gray-200 bg-gray-50 p-6">
-            <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
+            <dl className="space-y-6 text-sm font-medium text-gray-500">
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
                 <dd className="text-gray-900">{subtotal.toFixed(2)}</dd>
@@ -204,7 +208,7 @@ const Checkout = () => {
                       id="name-on-card"
                       name="name-on-card"
                       autoComplete="cc-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -222,7 +226,7 @@ const Checkout = () => {
                       id="card-number"
                       name="card-number"
                       autoComplete="cc-number"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -240,7 +244,7 @@ const Checkout = () => {
                       name="expiration-date"
                       id="expiration-date"
                       autoComplete="cc-exp"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -258,7 +262,7 @@ const Checkout = () => {
                       name="cvc"
                       id="cvc"
                       autoComplete="csc"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -276,18 +280,20 @@ const Checkout = () => {
                       id="postal-code"
                       name="postal-code"
                       autoComplete="postal-code"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="w-full sm:w-96 border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
                 </div>
               </div>
+              <div className="flex flex-col items-center justify-center h-full">
               <button
                 onClick={handlePay}
-                className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                className=" mt-4 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
               >
                 Pay ${total.toFixed(2)}
               </button>
+              </div>
             </form>
           </div>
         </section>

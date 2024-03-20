@@ -80,7 +80,7 @@ function SingleGame() {
     }
   };
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-8  flex items-center justify-center">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="relative bg-white shadow-md rounded-lg p-4">
           <img
@@ -109,7 +109,7 @@ function SingleGame() {
             onClick={() => {
               window.open(game?.trailer, "_blank");
             }}
-            className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+            className="mr-4 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
           >
             Watch The Trailer
           </button>
@@ -254,7 +254,7 @@ function SingleGame() {
                 </div>
                 <button
                   type="submit"
-                  className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  className="mr-4 frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
                 >
                   Submit
                 </button>

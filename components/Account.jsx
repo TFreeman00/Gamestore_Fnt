@@ -33,7 +33,7 @@ export default function Account() {
       <div className="max-w-md mx-auto mt-8 bg-white shadow-md rounded-lg p-6">
         {users && (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Account Details</h2>
+            <h2 className="text-center text-2xl font-bold mb-4">Account Details</h2>
             <hr className="my-4" />
             <div className="mb-4">
               <h4 className="text-lg mb-2">Id: {users.id}</h4>
@@ -41,18 +41,20 @@ export default function Account() {
               <h4 className="text-lg mb-2">Last Name: {users.lastname}</h4>
               <h4 className="text-lg mb-2">Email: {users.email}</h4>
             </div>
+            <div className="mt-4 flex flex-col items-center justify-center">
             <button
-              className="text-black hover:bg-blue-500 hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+              className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
               onClick={onEdit}
             >
               Edit
             </button>
+            </div>
           </div>
         )}
       </div>
       <hr className="my-8" />
       <div>
-        <h1 className="text-2xl font-bold mb-4">Order History</h1>
+        <h1 className="mt-4 flex flex-col items-center justify-center text-2xl font-bold mb-4">Order History</h1>
         <div>
           {newOrder.map((order, index) => {
             return (

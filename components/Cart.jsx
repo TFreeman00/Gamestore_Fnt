@@ -42,7 +42,7 @@ const Cart = () => {
   };
   return (
     <>
-      <h1 className="margintop text-2xl font-semibold">Cart</h1>
+      <h1 className="mt-4 mb-4 text-3xl lg:text-2xl font-bold text-center">Cart</h1>
       <hr className="my-4" />
       {(!token && session.cart.length && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -84,11 +84,11 @@ const Cart = () => {
               key={cartItem.id}
               className="bg-gray-100 p-4 rounded-md space-y-2"
             >
-              <div className="text-lg font-semibold">
+              <div className="text-lg font-semibold mb-4">
                 {cartItem.products.title}
               </div>
               <img
-                className="hw-40"
+                className="hw-40 mb-4"
                 src={cartItem.products.image}
                 alt={cartItem.products.title}
               />
@@ -98,7 +98,7 @@ const Cart = () => {
                 onClick={(e) => {
                   remove(e.target.id);
                 }}
-                className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                className="flex flex-col items-center justify-center text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
               >
                 Delete Item
               </button>
@@ -109,12 +109,14 @@ const Cart = () => {
       <h2 className="text-xl mt-4">Total Price: ${totalPrice.toFixed(2)}</h2>
       {token && !cart.length && <p>No Items In Cart</p>}
       {cart.length && (
+        <div className="mt-8 flex flex-col items-center justify-center h-full">
         <button
           onClick={checkout}
           className="w-64 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
         >
           Checkout
         </button>
+        </div>
       )}
       {!token && !session.cart && <p>No items</p>}
     </>

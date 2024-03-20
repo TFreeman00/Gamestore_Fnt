@@ -30,7 +30,7 @@ const AllGames = () => {
 
   return (
     <div>
-      <div className="container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {currentGames.map((game) => (
           <div
             key={game.id}
@@ -56,7 +56,7 @@ const AllGames = () => {
           <button
             key={number}
             onClick={() => handleClick(number)}
-            className={`mx-1 px-3 py-1 rounded-full border ${
+            className={`mt-8 mx-1 px-3 py-1 rounded-full border ${
               currentPage === number ? "bg-gray-500 " : ""
             }`}
           >

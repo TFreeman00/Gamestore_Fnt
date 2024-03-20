@@ -31,7 +31,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      <h1 className="text-3xl font-bold mb-8 text-center">Add New Game</h1>
+      <h1 className="text-3xl font-bold mb-8 mt-8 text-center">Add New Game</h1>
       <form onSubmit={submitForm} className="w-full max-w-md">
         <div className="mb-4">
           <label htmlFor="title" className="block mb-2">
@@ -129,12 +129,14 @@ const AdminDashboard = () => {
             className="w-full border border-gray-300 rounded px-3 py-2"
           />
         </div>
+        <div className="mt-4 flex flex-col items-center justify-center">
         <button
           type="submit"
           className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
         >
           Add Game
         </button>
+        </div>
       </form>
     </div>
   );
