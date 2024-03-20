@@ -78,7 +78,7 @@ const Checkout = () => {
                   <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
                     <div className="flex justify-between">
                       <dt>Subtotal</dt>
-                      <dd className="text-gray-900">${subtotal}</dd>
+                      <dd className="text-gray-900">${subtotal.toFixed(2)}</dd>
                     </div>
                     <div className="flex justify-between">
                       <dt>Taxes</dt>
@@ -126,7 +126,7 @@ const Checkout = () => {
             <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
-                <dd className="text-gray-900">{subtotal}</dd>
+                <dd className="text-gray-900">{subtotal.toFixed(2)}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Taxes</dt>

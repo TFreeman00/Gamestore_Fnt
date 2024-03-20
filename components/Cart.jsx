@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
-  const getCart = useGetCartQuery({ token }); 
+  const getCart = useGetCartQuery({ token });
   const { cart } = useSelector((state) => state.cartSlice);
   const navigate = useNavigate();
   const [session, setSession] = useState({ cart: [] });
@@ -111,7 +111,7 @@ const Cart = () => {
       {cart.length && (
         <button
           onClick={checkout}
-          className="hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+          className="w-64 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
         >
           Checkout
         </button>
