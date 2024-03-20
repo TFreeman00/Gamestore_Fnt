@@ -47,9 +47,13 @@ const Checkout = () => {
                   </h2>
                   <Disclosure.Button className="mb-8 font-medium text-indigo-600 hover:text-indigo-500">
                     {open ? (
-                      <span>Hide full summary</span>
+                      <span className="text-lg font-medium text-gray-900">
+                        Hide full summary
+                      </span>
                     ) : (
-                      <span>Show full summary</span>
+                      <span className="ml-8 text-lg font-medium text-gray-900">
+                        Show full summary
+                      </span>
                     )}
                   </Disclosure.Button>
                 </div>
@@ -81,20 +85,27 @@ const Checkout = () => {
                   <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
                     <div className="flex justify-between">
                       <dt>Subtotal</dt>
-                      <dd className="text-l lg:text-2xl font-bold text-center">${subtotal.toFixed(2)}</dd>
+                      <dd className="text-l lg:text-2xl font-bold text-center">
+                        ${subtotal.toFixed(2)}
+                      </dd>
                     </div>
                     <div className="flex justify-between">
                       <dt>Taxes</dt>
-                      <dd className="text-l lg:text-2xl font-bold text-centertext-gray-900">${taxes}</dd>
+                      <dd className="text-l lg:text-2xl font-bold text-centertext-gray-900">
+                        ${taxes}
+                      </dd>
                     </div>
                   </dl>
                 </Disclosure.Panel>
                 <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
                   <span className="text-base">Total</span>
-                  <span className="text-xl lg:text-2xl font-bold text-center">${total.toFixed(2)}</span>
+                  <span className="text-xl lg:text-2xl font-bold text-center">
+                    ${total.toFixed(2)}
+                  </span>
                 </p>
               </>
             )}
+            New 4:09
           </Disclosure>
         </section>
         {/* Order summary */}
@@ -111,7 +122,6 @@ const Checkout = () => {
           >
             {cart.map((item) => (
               <li key={item.id} className=" flex space-x-6 py-6">
-                
                 <img
                   src={item?.products?.image}
                   alt={item?.products?.title}
@@ -143,7 +153,6 @@ const Checkout = () => {
             </dl>
           </div>
         </section>
-
         <section
           aria-labelledby="payment-heading"
           className="flex-auto overflow-y-auto px-4 pb-16 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pb-24 lg:pt-0"
@@ -287,12 +296,12 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center h-full">
-              <button
-                onClick={handlePay}
-                className=" mt-4 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
-              >
-                Pay ${total.toFixed(2)}
-              </button>
+                <button
+                  onClick={handlePay}
+                  className=" mt-4 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                >
+                  Pay ${total.toFixed(2)}
+                </button>
               </div>
             </form>
           </div>
