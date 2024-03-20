@@ -12,11 +12,14 @@ export default function Account() {
   let newOrder = [];
   for (let i = 0; i < order.length; i++) {
     let totalPrice = 0;
+    let total = 0;
+
     for (let x of order[i].productInfo) {
       totalPrice += x.productDescription.price;
+      total = Number(totalPrice * 1.07).toFixed(2);
     }
     newOrder.push({
-      totalPrice,
+      total,
       ...order[i],
     });
   }
@@ -59,7 +62,7 @@ export default function Account() {
                   Order Placed:{" "}
                   {order.createdat.slice(0, order.createdat.search("T"))}
                 </div>
-                <div className="mb-2">Total Price: ${order.totalPrice}</div>
+                <div className="mb-2">Total Price: ${order.total}</div>
                 {order.productInfo.map((product, index) => (
                   <div key={index} className="mb-2">
                     {product.productDescription.title}

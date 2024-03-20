@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../api/authApi";
 import { useSessionAddToCartMutation } from "../api/cartApi";
-
 export default function Login() {
   const [cart] = useSessionAddToCartMutation();
   const navigate = useNavigate();
@@ -11,16 +10,12 @@ export default function Login() {
     email: "",
     password: "",
   });
-
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const result = await login(form);
-
     if (result.error) {
       alert("Invalid login credentials");
       navigate("/auth/login");
@@ -37,7 +32,11 @@ export default function Login() {
       navigate("/");
     }
   };
-
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  };
   return (
     <div
       style={{
@@ -71,6 +70,7 @@ export default function Login() {
               name="password"
               placeholder="Password"
               onChange={onChange}
+              onKeyDown={handleKeyDown}
               className="border border-gray-300 rounded-md p-2"
               required
             />

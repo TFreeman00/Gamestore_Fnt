@@ -13,6 +13,7 @@ const imageUrl =
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token, users, cart } = useSelector((state) => ({
@@ -42,6 +43,8 @@ const Navbar = () => {
   const logout = () => {
     dispatch(setToken(null));
     window.sessionStorage.removeItem("authToken");
+    setShowLogoutMessage(true); // Shows logout message
+    setTimeout(() => setShowLogoutMessage(false), 3000);
     navigate("/");
   };
 
@@ -61,8 +64,8 @@ const Navbar = () => {
         <div className="flex items-center space-x-4 relative">
           {/* Greeting message for User Below */}
           {token && (
-            <span className="hidden sm:inline text-black">
-              Welcome! {users.firstname}
+            <span className="sm:inline text-black">
+              Welcome, {users.firstname}!
             </span>
           )}
           {!token ? (
@@ -79,6 +82,9 @@ const Navbar = () => {
               >
                 Register
               </button>
+              {showLogoutMessage && (
+                <p className="text-red-500">You are logged out</p>
+              )}
             </>
           ) : (
             <>
