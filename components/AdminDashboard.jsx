@@ -129,12 +129,14 @@ const AdminDashboard = () => {
             className="w-full border border-gray-300 rounded px-3 py-2"
           />
         </div>
+        <div className="flex flex-col items-center justify-center h-full">
         <button
           type="submit"
-          className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+          className="items-center relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
         >
           Add Game
         </button>
+        </div>
       </form>
     </div>
   );

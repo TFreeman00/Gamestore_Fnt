@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation } from "../api/ordersApi";
@@ -25,9 +25,12 @@ const Checkout = () => {
   };
   return (
     <>
-      <main className="lg:flex lg:min-h-full lg:flex-row-reverse lg:overflow-hidden">
-        <h1 className="sr-only">Checkout</h1>
-        {/* Mobile order summary */}
+      <main className="flex flex-col items-center justify-center h-full">
+        <div className="flex items-center justify-center w-full h-full">
+          <h1 className="text-3xl lg:text-2xl font-bold text-center">
+            Check out
+          </h1>
+        </div>
         <section
           aria-labelledby="order-heading"
           className="bg-gray-50 px-4 py-6 sm:px-6 lg:hidden"
@@ -56,11 +59,11 @@ const Checkout = () => {
                     className="divide-y divide-gray-200 border-b border-gray-200"
                   >
                     {cart.map((item, idx) => (
-                      <li key={idx} className="flex space-x-6 py-6">
+                      <li key={idx} className=" flex space-x-6 py-6">
                         <img
                           src={item?.products?.image}
                           alt={item?.products?.title}
-                          className="h-40 w-40 flex-none rounded-md bg-gray-200 object-cover object-center"
+                          className="h-40  text-2xl w-4 flex-none rounded-md bg-gray-200 object-cover object-center"
                         />
                         <div className="flex flex-col justify-between space-y-4">
                           <div className="space-y-1 text-sm font-medium">
@@ -147,7 +150,7 @@ const Checkout = () => {
           <div className="mx-auto max-w-lg">
             <button
               type="button"
-              className="flex w-full items-center justify-center rounded-md border border-transparent bg-black py-2 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+              className="flex w-64 items-center justify-center rounded-md border border-transparent bg-black py-2 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
             >
               <span className="sr-only">Buy with</span>
               <svg
@@ -163,7 +166,7 @@ const Checkout = () => {
                 className="absolute inset-0 flex items-center"
                 aria-hidden="true"
               >
-                <div className="w-full border-t border-gray-200" />
+                <div className="w-64 border-t border-gray-200" />
               </div>
               <div className="relative flex justify-center">
                 <span className="bg-white px-4 text-sm font-medium text-gray-500">
@@ -186,7 +189,7 @@ const Checkout = () => {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -204,7 +207,7 @@ const Checkout = () => {
                       id="name-on-card"
                       name="name-on-card"
                       autoComplete="cc-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -222,7 +225,7 @@ const Checkout = () => {
                       id="card-number"
                       name="card-number"
                       autoComplete="cc-number"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -240,7 +243,7 @@ const Checkout = () => {
                       name="expiration-date"
                       id="expiration-date"
                       autoComplete="cc-exp"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -258,7 +261,7 @@ const Checkout = () => {
                       name="cvc"
                       id="cvc"
                       autoComplete="csc"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
@@ -276,18 +279,20 @@ const Checkout = () => {
                       id="postal-code"
                       name="postal-code"
                       autoComplete="postal-code"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
                     />
                   </div>
                 </div>
               </div>
+              <div className="flex flex-col items-center justify-center h-full">
               <button
                 onClick={handlePay}
-                className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
               >
                 Pay ${total.toFixed(2)}
               </button>
+              </div>
             </form>
           </div>
         </section>
