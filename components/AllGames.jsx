@@ -36,7 +36,7 @@ const AllGames = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="mt-10 container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {currentGames.map((game) => (
           <div

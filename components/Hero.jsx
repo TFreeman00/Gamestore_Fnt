@@ -36,7 +36,7 @@ function Hero() {
           {/* Call-to-Action Button */}
           <Link
             to="/games"
-            className="hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+            className="hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 text-lg transition duration-300 ease-in-out"
           >
             Explore Games
           </Link>

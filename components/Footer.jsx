@@ -8,13 +8,13 @@ const Footer = () => {
           &copy; Video Game Store {new Date().getFullYear()}
         </p>
         <div className="mt-4 flex justify-center space-x-4">
-          <a href="#" className="hover:text-gray-400">
+          <Link to="/terms" className="hover:text-gray-400">
             Terms of Service
-          </a>
-          <a href="#" className="hover:text-gray-400">
+          </Link>
+          <Link to="/policy" className="hover:text-gray-400">
             Privacy Policy
-          </a>
-          <Link to="/ContactForm" className="hover:text-gray-400">
+          </Link>
+          <Link to="/contactForm" className="hover:text-gray-400">
             Contact Us
           </Link>
         </div>

@@ -1319,6 +1319,17 @@ footer {
   margin-top: auto;
 }
 
+/* colors */
+.bg-cyan-200 {
+  background: #a5f3fc;
+}
+.bg-cyan-300 {
+  background: #67e8f9;
+}
+.bg-cyan-400 {
+  background: #38bdf8;
+}
+
 
 @media (min-width: 480px) {
   .sm\:h-5 {

@@ -22,6 +22,11 @@ module.exports = {
         500: "#3b82f6",
         700: "#1d4ed8",
       },
+      cyan: {
+        200: "#a5f3fc",
+        300: "#67e8f9",
+        400: "#22d3ee",
+      },
       purple: {
         DEFAULT: "#7e5bef",
         dark: "#5c3da0",

@@ -196,10 +196,10 @@ const Checkout = () => {
                     <input
                       type="email"
                       id="email-address"
-                      name="email-address"
-                      autoComplete="email"
+                      name="email"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
+                      title="Please enter a valid email address"
                     />
                   </div>
                 </div>
@@ -214,10 +214,10 @@ const Checkout = () => {
                     <input
                       type="text"
                       id="name-on-card"
-                      name="name-on-card"
-                      autoComplete="cc-name"
-                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      name="name"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
+                      title="Please enter your full name"
                     />
                   </div>
                 </div>
@@ -230,12 +230,15 @@ const Checkout = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      type="number"
+                      type="text"
                       id="card-number"
-                      name="card-number"
-                      autoComplete="cc-number"
-                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      name="card"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
+                      minLength="16"
+                      maxLength="16"
+                      pattern="[0-9]{16}"
+                      title="Please enter a 16-digit card number"
                     />
                   </div>
                 </div>
@@ -244,17 +247,43 @@ const Checkout = () => {
                     htmlFor="expiration-date"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Expiration date (MM/YY)
+                    Expiration date
                   </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="expiration-date"
-                      id="expiration-date"
-                      autoComplete="cc-exp"
-                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  <div className="mt-1 grid grid-cols-2 gap-x-4">
+                    <select
+                      id="expiration-month"
+                      name="expirationMonth"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       required
-                    />
+                    >
+                      <option value="">Month</option>
+                      {/* Add options for each month */}
+                      {Array.from({ length: 12 }, (_, i) => {
+                        const month = (i + 1).toString().padStart(2, "0"); // Pad single digit months with leading zero
+                        return (
+                          <option key={month} value={month}>
+                            {month}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <select
+                      id="expiration-year"
+                      name="expirationYear"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      required
+                    >
+                      <option value="">Year</option>
+                      {/* Add options for years, starting from current year */}
+                      {Array.from({ length: 10 }, (_, i) => {
+                        const year = new Date().getFullYear() + i;
+                        return (
+                          <option key={year} value={year}>
+                            {year.toString().slice(-2)}
+                          </option>
+                        ); // Use last two digits of the year
+                      })}
+                    </select>
                   </div>
                 </div>
                 <div className="col-span-4 sm:col-span-3">
@@ -266,12 +295,15 @@ const Checkout = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      type="number"
-                      name="cvc"
+                      type="text"
                       id="cvc"
-                      autoComplete="csc"
-                      className="block w-96 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      name="cvc"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      minLength="3"
+                      maxLength="4"
                       required
+                      pattern="[0-9]{3,4}"
+                      title="Please enter a 3 or 4-digit CVC"
                     />
                   </div>
                 </div>
@@ -286,18 +318,21 @@ const Checkout = () => {
                     <input
                       type="number"
                       id="postal-code"
-                      name="postal-code"
-                      autoComplete="postal-code"
-                      className="w-full sm:w-96 border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      name="postal"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      minLength="5"
+                      maxLength="5"
                       required
+                      pattern="[0-9]{5}"
+                      title="Please enter a 5-digit postal code"
                     />
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center h-full">
                 <button
-                  onClick={handlePay}
-                  className=" mt-4 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  type="submit"
+                  className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Pay ${total.toFixed(2)}
                 </button>

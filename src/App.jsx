@@ -17,7 +17,9 @@ import EditProfile from "../components/EditProfile";
 import Checkout from "../components/Checkout"
 import Footer from "../components/Footer";
 import ContactForm from "../components/ContactForm";
-
+import ContactConfirmation from "../components/ContactConfirmation";
+import Policy from "../components/Policy";
+import Terms from "../components/Terms";
 
 
 function App() {
@@ -39,7 +41,9 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirmation" element={<OrderConfirmation />} />
         <Route path="/contactForm" element={<ContactForm />} />
-
+        <Route path="/contactConfirmation" element={<ContactConfirmation />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
       <Footer />
     </Router>

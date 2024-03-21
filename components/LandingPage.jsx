@@ -21,7 +21,7 @@ const LandingPage = () => {
   const randomGames = shuffledGames.slice(0, 6);
 
   return (
-    <>
+    <div className="bg-white">
       <Hero />{" "}
       <div className="container mx-auto pt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {randomGames.map((game) => (
@@ -43,7 +43,7 @@ const LandingPage = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
