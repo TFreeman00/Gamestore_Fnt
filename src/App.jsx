@@ -38,7 +38,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirmation" element={<OrderConfirmation />} />
-        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/contactForm" element={<ContactForm />} />
 
       </Routes>
       <Footer />

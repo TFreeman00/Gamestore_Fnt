@@ -105,14 +105,18 @@ function SingleGame() {
             First Release Date:{" "}
             {game?.first_release_date || data?.first_release_date}
           </h2>
-          <button
-            onClick={() => {
-              window.open(game?.trailer, "_blank");
-            }}
-            className="mr-4 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+          <iframe
+            width="560"
+            height="315"
+            src={game?.trailer}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
           >
-            Watch The Trailer
-          </button>
+            Watch the Tailer
+          </iframe>
           <button
             onClick={handleAddToCart}
             className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
@@ -124,17 +128,17 @@ function SingleGame() {
           )}
           {/* Login popup */}
           {showLoginPopup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
-              <div className="bg-white p-8 rounded-md shadow-md">
-                <h2 className="text-lg font-semibold mb-4">
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 ">
+              <div className="max-w-md w-full mx-4 md:mx-auto p-8 justify-center bg-white shadow-md rounded-lg">
+                <h2 className="text-center text-xl font-semibold mb-4">
                   Please log in or register
                 </h2>
-                <div className="flex justify-center">
+                <div className="flex justify-center mb-4">
                   <button
                     onClick={() => {
                       navigate("/auth/login");
                     }}
-                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 text-lg ease-in-out"
                   >
                     Log In
                   </button>
@@ -142,7 +146,7 @@ function SingleGame() {
                     onClick={() => {
                       navigate("/auth/register");
                     }}
-                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                    className=" ml-2 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 text-lg ease-in-out"
                   >
                     Register
                   </button>

@@ -75,12 +75,14 @@ export default function Login() {
               required
             />
           </label>
-          <button
-            type="submit"
-            className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2 border"
-          >
-            Submit
-          </button>
+          <div className="mt-8 flex flex-col items-center justify-center h-full">
+            <button
+              type="submit"
+              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2 border"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

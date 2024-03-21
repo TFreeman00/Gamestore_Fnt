@@ -42,7 +42,9 @@ const Cart = () => {
   };
   return (
     <>
-      <h1 className="mt-4 mb-4 text-3xl lg:text-2xl font-bold text-center">Cart</h1>
+      <h1 className="mt-4 mb-4 text-3xl lg:text-2xl font-bold text-center">
+        Cart
+      </h1>
       <hr className="my-4" />
       {(!token && session.cart.length && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -108,16 +110,14 @@ const Cart = () => {
       )}
       <h2 className="text-xl mt-4">Total Price: ${totalPrice.toFixed(2)}</h2>
       {token && !cart.length && <p>No Items In Cart</p>}
-      {cart.length && (
-        <div className="mt-8 flex flex-col items-center justify-center h-full">
+      {cart.length ? (
         <button
           onClick={checkout}
           className="w-64 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
         >
           Checkout
         </button>
-        </div>
-      )}
+      ) : null}
       {!token && !session.cart && <p>No items</p>}
     </>
   );

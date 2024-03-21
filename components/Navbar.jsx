@@ -16,11 +16,8 @@ const Navbar = () => {
   const [showLogoutMessage, setShowLogoutMessage] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token, users, cart } = useSelector((state) => ({
-    token: state.authSlice.token,
-    users: state.authSlice.users,
-    cart: state.cartSlice.cart,
-  }));
+  const { token, users } = useSelector((state) => state.authSlice);
+  const { cart } = useSelector((state) => state.cartSlice);
 
   useEffect(() => {
     dispatch(updateCartItemCount());

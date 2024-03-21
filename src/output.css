@@ -503,11 +503,18 @@ select:focus {
     var(--tw-shadow);
   border-color: #2563eb;
 }
+.items-center {
+  align-items: center;
+}
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
   color: #6b7280;
   opacity: 1;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 input::placeholder,
@@ -892,6 +899,10 @@ textarea::placeholder {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem/* 8px */;
 }
 
 .ml-8 {
