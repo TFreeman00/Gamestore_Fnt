@@ -80,7 +80,7 @@ function SingleGame() {
     }
   };
   return (
-    <div className="bg-white mx-auto p-8 flex justify-center">
+    <div className="bg-white mt-3 mx-auto p-8 flex justify-center">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="relative bg-white shadow-md rounded-lg p-4">
           <img
@@ -165,9 +165,9 @@ function SingleGame() {
             </div>
           )}
         </div>
-        <div className=" max-w-full  bg-white shadow-md rounded-lg p-4">
+        <div>
           {users && users.isadmin && (
-            <div className="container mx-auto px-4 py-8">
+            <div className="max-w-full  bg-white shadow-md rounded-lg p-4">
               <h1 className="text-3xl font-bold mb-8 text-center">Edit Game</h1>
               <form onSubmit={submitForm} className="mb-8">
                 <div className="mb-4">
