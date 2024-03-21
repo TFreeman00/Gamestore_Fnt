@@ -80,31 +80,19 @@ function SingleGame() {
     }
   };
   return (
-    <div className="container mx-auto p-8  flex items-center justify-center">
+    <div className="bg-white mx-auto p-8 flex justify-center">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="relative bg-white shadow-md rounded-lg p-4">
           <img
             src={game?.image || data?.image}
             alt={game?.title || data?.title}
-            className="w-full h-52 object-cover mb-4 rounded-lg"
+            className="w-full h-full object-cover mb-4 rounded-lg"
           />
-          <h1 className="text-xl font-semibold mb-2">
-            {game?.title || data?.title}
-          </h1>
-          <h2 className="text-gray-600 mb-2">${game?.price || data?.price}</h2>
-          <p className="text-gray-500 mb-4">
-            {game?.description || data?.description}
-          </p>
-          <h2 className="text-gray-600 mb-2">
-            Genre: {game?.genre || data?.genre}
-          </h2>
-          <h2 className="text-gray-600 mb-2">
-            Platform: {game?.platform || data?.platform}
-          </h2>
-          <h2 className="text-gray-600 mb-2">
-            First Release Date:{" "}
-            {game?.first_release_date || data?.first_release_date}
-          </h2>
+        </div>
+        <div
+          className="container justify-center
+         mx-auto px-4 py-8"
+        >
           <iframe
             width="560"
             height="315"
@@ -112,21 +100,43 @@ function SingleGame() {
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          >
-            Watch the Tailer
-          </iframe>
-          <button
-            onClick={handleAddToCart}
-            className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
-          >
-            Add to Cart
-          </button>
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+          <div>
+            <h1 className="text-xl mt-2 text-center font-semibold mb-2">
+              {game?.title || data?.title}
+            </h1>
+            <h2 className="text-gray-600 text-lg mb-2">
+              ${game?.price || data?.price}
+            </h2>
+            <p className="text-black text-lg mb-4">
+              {game?.description || data?.description}
+            </p>
+            <h2 className="text-gray-600 text-lg mb-2">
+              Genre: {game?.genre || data?.genre}
+            </h2>
+            <h2 className="text-gray-600 text-lg mb-2">
+              Platform: {game?.platform || data?.platform}
+            </h2>
+            <h2 className="text-gray-600 text-lg mb-2">
+              First Release Date:{" "}
+              {game?.first_release_date || data?.first_release_date}
+            </h2>
+          </div>
+          <div className="mx-auto justify-center mt-4 flex flex-col items-center">
+            <button
+              onClick={handleAddToCart}
+              className="text-lg bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+            >
+              Add to Cart
+            </button>
+          </div>
           {showNotification && (
-            <div className="dropdown-notification">Item added to cart</div>
+            <div className="dropdown-notification text-lg">
+              Item added to cart
+            </div>
           )}
-          {/* Login popup */}
           {showLoginPopup && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 ">
               <div className="max-w-md w-full mx-4 md:mx-auto p-8 justify-center bg-white shadow-md rounded-lg">
@@ -155,13 +165,13 @@ function SingleGame() {
             </div>
           )}
         </div>
-        <div>
+        <div className=" max-w-full  bg-white shadow-md rounded-lg p-4">
           {users && users.isadmin && (
             <div className="container mx-auto px-4 py-8">
               <h1 className="text-3xl font-bold mb-8 text-center">Edit Game</h1>
               <form onSubmit={submitForm} className="mb-8">
                 <div className="mb-4">
-                  <label htmlFor="title" className="block mb-2">
+                  <label htmlFor="title" className="block mb-2 text-lg">
                     Title
                   </label>
                   <input
@@ -173,7 +183,7 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="genre" className="block mb-2">
+                  <label htmlFor="genre" className="block mb-2 text-lg">
                     Genre
                   </label>
                   <input
@@ -185,7 +195,10 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="first_release_date" className="block mb-2">
+                  <label
+                    htmlFor="first_release_date"
+                    className="block mb-2 text-lg"
+                  >
                     First Release Date
                   </label>
                   <input
@@ -197,7 +210,7 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="image" className="block mb-2">
+                  <label htmlFor="image" className="block mb-2 text-lg">
                     Image
                   </label>
                   <input
@@ -209,7 +222,7 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="price" className="block mb-2">
+                  <label htmlFor="price" className="block mb-2 text-lg">
                     Price
                   </label>
                   <input
@@ -221,7 +234,7 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="trailer" className="block mb-2">
+                  <label htmlFor="trailer" className="block mb-2 text-lg">
                     Trailer
                   </label>
                   <input
@@ -233,7 +246,7 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="description" className="block mb-2">
+                  <label htmlFor="description" className="block mb-2 text-lg">
                     Description
                   </label>
                   <input
@@ -245,7 +258,7 @@ function SingleGame() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="platform" className="block mb-2">
+                  <label htmlFor="platform" className="block mb-2 text-lg">
                     Platform
                   </label>
                   <input
@@ -258,13 +271,13 @@ function SingleGame() {
                 </div>
                 <button
                   type="submit"
-                  className="mr-4 frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  className="mr-4 frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition text-lg duration-300 ease-in-out"
                 >
                   Submit
                 </button>
                 <button
                   type="button"
-                  className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                  className="frelative bottom-4 left-4 hover:bg-blue text-lg hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out"
                   onClick={() => setFormData({})}
                 >
                   Cancel

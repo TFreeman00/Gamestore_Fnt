@@ -950,7 +950,7 @@ textarea::placeholder {
 }
 
 .h-52 {
-  height: 13rem;
+  height: 16rem;
 }
 
 .h-full {
@@ -998,6 +998,10 @@ textarea::placeholder {
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.gap-3 {
+  gap: 0.75rem/* 12px */;
 }
 
 .border-collapse {
