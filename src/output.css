@@ -1816,3 +1816,7 @@ footer {
 .w-96 {
   width: 24rem /* 384px */;
 }
+
+.ml-4 {
+  margin-left: 1rem/* 16px */;
+}
