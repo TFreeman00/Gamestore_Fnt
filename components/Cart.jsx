@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ const Cart = () => {
   const getCart = useGetCartQuery({ token });
   const { cart } = useSelector((state) => state.cartSlice);
   const navigate = useNavigate();
-  const [session, setSession] = useState({ cart: [] });
+  console.log(cart);
 
   let totalPrice = 0;
 
@@ -18,11 +18,12 @@ const Cart = () => {
   });
 
   useEffect(() => {
-    const setCart = () => {
+    const getCart = () => {
       const data = {
         cart: JSON.parse(window.sessionStorage.cart),
       };
-      setSession(data);
+      console.log(data);
+      getCart(data);
     };
   }, []);
 
@@ -31,7 +32,6 @@ const Cart = () => {
   };
 
   const remove = (id) => {
-    console.log(id);
     deleteItem({
       productid: Number(id),
       token,
@@ -82,7 +82,9 @@ const Cart = () => {
                     <button
                       id={cartItem.productid}
                       onClick={(e) => {
-                        remove(e?.target?.id);
+                        e.preventDefault();
+
+                        remove(e.target.id);
                       }}
                       className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
                     >
