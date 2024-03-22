@@ -126,11 +126,43 @@ function SingleGame() {
           <div className="mt-4 flex justify-center">
             <button
               onClick={handleAddToCart}
-              className="text-lg hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out"
+              className="text-lg bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
             >
               Add to Cart
             </button>
           </div>
+          {showNotification && (
+            <div className="dropdown-notification text-lg">
+              Item added to cart
+            </div>
+          )}
+          {showLoginPopup && (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 ">
+              <div className="max-w-md w-full mx-4 md:mx-auto p-8 justify-center bg-white shadow-md rounded-lg">
+                <h2 className="text-center text-xl font-semibold mb-4">
+                  Please log in or register
+                </h2>
+                <div className="flex justify-center mb-4">
+                  <button
+                    onClick={() => {
+                      navigate("/auth/login");
+                    }}
+                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 text-lg ease-in-out"
+                  >
+                    Log In
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate("/auth/register");
+                    }}
+                    className=" ml-2 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 text-lg ease-in-out"
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <div>
           {users && users.isadmin && (
