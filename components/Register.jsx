@@ -40,7 +40,7 @@ export default function Register() {
         alignItems: "center",
       }}
     >
-      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg">
+      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg" style={{ opacity: 0.9 }}>
         <h2 className="text-2xl text-center font-bold mb-4">Register</h2>
         <form onSubmit={onSubmit} className="space-y-4">
           <label className="flex flex-col">
