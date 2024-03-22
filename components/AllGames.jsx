@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useGetAllGamesQuery } from "../api/gamesApi";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AllGames = () => {
-  const [games, setGames] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search");
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 6;
 
-  const { data: allGames = [], error, isLoading } = useGetAllGamesQuery();
-
-  useEffect(() => {
-    if (allGames) {
-      setGames(allGames);
-    }
-  }, [allGames]);
+  const { data } = useGetAllGamesQuery();
+  const { games } = useSelector((state) => state.gameSlice);
 
   const filteredGames = games.filter((game) =>
     game.title.toLowerCase().includes((searchQuery || "").toLowerCase())

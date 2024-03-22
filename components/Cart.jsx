@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
   const [deleteItem] = useDeleteCartMutation();
@@ -9,10 +10,13 @@ const Cart = () => {
   const { cart } = useSelector((state) => state.cartSlice);
   const navigate = useNavigate();
   const [session, setSession] = useState({ cart: [] });
+
   let totalPrice = 0;
+
   cart.forEach((item) => {
     totalPrice += Number(item.products.price);
   });
+
   useEffect(() => {
     const setCart = () => {
       const data = {
@@ -21,15 +25,19 @@ const Cart = () => {
       setSession(data);
     };
   }, []);
+
   const checkout = async () => {
     navigate("/checkout");
   };
+
   const remove = (id) => {
+    console.log(id);
     deleteItem({
       productid: Number(id),
       token,
     });
   };
+
   return (
     <div
       style={{
@@ -74,7 +82,7 @@ const Cart = () => {
                     <button
                       id={cartItem.productid}
                       onClick={(e) => {
-                        remove(e.target.id);
+                        remove(e?.target?.id);
                       }}
                       className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
                     >
