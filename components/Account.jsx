@@ -59,10 +59,13 @@ export default function Account() {
         <h1 className="mt-4 flex flex-col items-center justify-center text-2xl font-bold mb-4">
           Order History
         </h1>
-        <div>
+        <div className="mt-10 container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {newOrder.map((order, index) => {
             return (
-              <div key={index} className="mb-8">
+              <div
+                key={index}
+                className="mb-8 max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg"
+              >
                 <div className="mb-2 font-bold">Order Number: {order.id}</div>
                 <div className="mb-2">
                   Order Placed:{" "}
