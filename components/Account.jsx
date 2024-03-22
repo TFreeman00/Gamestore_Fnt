@@ -64,7 +64,7 @@ export default function Account() {
             return (
               <div
                 key={index}
-                className="mb-8 max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg"
+                className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 mb-8 max-w-md w-full mx-4 md:mx-auto p-8"
               >
                 <div className="mb-2 font-bold">Order Number: {order.id}</div>
                 <div className="mb-2">
