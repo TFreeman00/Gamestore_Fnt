@@ -50,7 +50,7 @@ const Cart = () => {
         alignItems: "center",
       }}
     >
-      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg">
+      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg" style={{ opacity: 0.9 }}>
         <main>
           <h1 className="flex text-3xl font-bold mt-3 tracking-tight text-gray-500 sm:text-4xl justify-center">
             Shopping Cart
