@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useCreateGameMutation } from "../api/gamesApi";
-
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const [createGame] = useCreateGameMutation();
+  const [showNotification, setShowNotification] = useState(false);
   const [formData, setFormData] = useState({
     id: null,
     title: "",
@@ -16,10 +16,8 @@ const AdminDashboard = () => {
     description: "",
     platform: "",
   });
-
   const updateForm = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const submitForm = async (e) => {
     e.preventDefault();
     const result = await createGame({
@@ -27,8 +25,13 @@ const AdminDashboard = () => {
       price: Number(formData.price),
     });
     console.log(result);
+    try {
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000);
+    } catch (error) {
+      console.log("Error game not added", error);
+    }
   };
-
   return (
     <div
       style={{
@@ -41,8 +44,13 @@ const AdminDashboard = () => {
         alignItems: "center",
       }}
     >
-      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg"style={{ opacity: 0.9 }}>
-        <h1 className="text-3xl font-bold mb-8 mt-8 text-center ">Add New Game</h1>
+      <div
+        className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg"
+        style={{ opacity: 0.9 }}
+      >
+        <h1 className="text-3xl font-bold mb-8 mt-8 text-center ">
+          Add New Game
+        </h1>
         <form onSubmit={submitForm} className="w-full max-w-md">
           <div className="mb-4">
             <label htmlFor="title" className="block mb-2">
@@ -147,11 +155,15 @@ const AdminDashboard = () => {
             >
               Add Game
             </button>
+            {showNotification && (
+              <div className="dropdown-notification text-lg flex flex-col items-center justify-center mt-4">
+                Game added successfully!
+              </div>
+            )}
           </div>
         </form>
       </div>
     </div>
   );
 };
-
 export default AdminDashboard;
