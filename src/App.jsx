@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useGetUserInfoQuery } from "../api/authApi"; 
+import { useGetUserInfoQuery } from "../api/authApi";
 import LandingPage from "../components/LandingPage";
 import AllGames from "../components/AllGames";
 import SingleGame from "../components/SingleGame";
@@ -14,10 +14,8 @@ import Cart from "../components/Cart";
 import AdminDashboard from "../components/AdminDashboard";
 import OrderConfirmation from "../components/OrderConfirmation";
 import EditProfile from "../components/EditProfile";
-import Checkout from "../components/Checkout"
+import Checkout from "../components/Checkout";
 import Footer from "../components/Footer";
-
-
 
 function App() {
   return (
