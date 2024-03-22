@@ -252,9 +252,7 @@ Use the modern Firefox focus style for all focusable elements.
   outline: auto;
 }
 
-/*
-Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
-*/
+
 
 :-moz-ui-invalid {
   box-shadow: none;
@@ -608,6 +606,12 @@ textarea::placeholder {
     var(--tw-shadow);
 }
 
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem/* 16px */ * var(--tw-space-x-reverse));
+  margin-left: calc(1rem/* 16px */ * calc(1 - var(--tw-space-x-reverse)));
+}
+
 [type="checkbox"]:checked,
 [type="radio"]:checked {
   border-color: transparent;
@@ -789,9 +793,34 @@ textarea::placeholder {
   --tw-backdrop-sepia: ;
 }
 
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+  --tw-aspect-w: 16;
+}
+.aspect-w-16 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+.aspect-h-9 {
+  --tw-aspect-h: 9;
+}
 
 .container {
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .md\:text-6xl {
+    font-size: 4rem/* 64px */;
+  }
 }
 
 @media (min-width: 976px) {
@@ -803,6 +832,12 @@ textarea::placeholder {
 @media (min-width: 480px) {
   .container {
     max-width: 480px;
+  }
+}
+
+@media (min-width: 480px) {
+  .sm\:hidden {
+    display: none;
   }
 }
 
@@ -827,6 +862,18 @@ textarea::placeholder {
 @media (min-width: 976px) {
   .lg\:text-3xl {
     font-size: 1.875rem/* 30px */;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:text-6xl {
+    font-size: 4rem/* 64px */;
   }
 }
 
@@ -859,6 +906,8 @@ textarea::placeholder {
   z-index: 10;
 }
 
+
+/* Margin */
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -882,12 +931,16 @@ textarea::placeholder {
   margin-bottom: 1rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .mb-8 {
   margin-bottom: 2rem;
 }
 
 .mr-1 {
-  margin-right: -.2rem/* 4px */;
+  margin-right: -.2rem;
 }
 
 .mr-2 {

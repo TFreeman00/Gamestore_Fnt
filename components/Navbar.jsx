@@ -35,12 +35,12 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, []); // Empty dependency array ensures that this effect runs only once
+  }, []); 
 
   const logout = () => {
     dispatch(setToken(null));
     window.sessionStorage.removeItem("authToken");
-    setShowLogoutMessage(true); // Shows logout message
+    setShowLogoutMessage(true); 
     setTimeout(() => setShowLogoutMessage(false), 3000);
     navigate("/");
   };
@@ -51,17 +51,16 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow">
-      <div className="container mx-auto px-4 lg:px-8 flex justify-between items-center">
+      <div className="container mx-auto px-4 lg:px-8 sm:inline flex flex-wrap justify-between items-center">
         <a
           href="/"
-          className="text-black font-bold text-lg hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2 flex items-center"
+          className="text-black font-bold text-lg hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-4 py-2 flex items-center mb-4 sm:mb-0"
         >
-          <img src={imageUrl} alt="Icon" className="w-9 h-9 mr-2" /> VGstore
+          <img src={imageUrl} alt="Icon" className="flex sm:inline justify-start gap-2 w-9 h-9 mr-4" /> VGstore
         </a>
-        <div className="flex items-center space-x-4 relative">
-          {/* Greeting message for User Below */}
+        <div className="flex items-center mt-3 ml-1 text-lg space-x-4 mb-4 sm:mb-0">
           {token && (
-            <span className="sm:inline text-black">
+            <span className="sm:inline ml-3 text-black">
               Welcome, {users.firstname}!
             </span>
           )}
@@ -121,6 +120,8 @@ const Navbar = () => {
           >
             Games
           </button>
+        </div>
+        <div className="flex items-center mb-4 sm:mb-0">
           <div className="relative">
             <input
               type="text"
@@ -141,16 +142,16 @@ const Navbar = () => {
               <MagnifyingGlassIcon className="h-5 w-5" />
             </button>
           </div>
+          <button
+            onClick={() => navigate("/cart")}
+            className="text-black hover:text-gray-300 bg-gray duration-300 rounded-md px-2 py-2 sm:px-4 relative"
+          >
+            <ShoppingCartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+            <span className="absolute top-0 right-0 mt-0.5 mr-0.5 text-blue-500 rounded-full px-1.5 sm:px-2 py-0.5 text-xs sm:text-lg">
+              {cart.length}
+            </span>
+          </button>
         </div>
-        <button
-          onClick={() => navigate("/cart")}
-          className="text-black hover:text-gray-300 bg-gray duration-300 rounded-md px-2 py-2 sm:px-4 relative"
-        >
-          <ShoppingCartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-          <span className="absolute top-0 right-0 mt-0.5 mr-0.5 text-blue-500 rounded-full px-1.5 sm:px-2 py-0.5 text-xs sm:text-lg">
-            {cart.length}
-          </span>
-        </button>
       </div>
     </nav>
   );
