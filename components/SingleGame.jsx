@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetGameByIdQuery, useUpdateGameMutation } from "../api/gamesApi";
 import { useAddToCartMutation } from "../api/cartApi";
+
 function SingleGame() {
   const { id } = useParams();
   const [updateGame] = useUpdateGameMutation();
@@ -22,8 +23,10 @@ function SingleGame() {
     description: "",
     platform: "",
   });
+
   const updateForm = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const submitForm = async (e) => {
     e.preventDefault();
     const result = await updateGame({
@@ -33,21 +36,18 @@ function SingleGame() {
     });
     console.log(result);
   };
+
   const cartSession = (e) => {
     if (window.sessionStorage.cart) {
-      //get cart
       const cart = JSON.parse(window.sessionStorage.cart);
-      //add item into cart
       cart.push({
         id: e.target.dataset.targetId,
         title: e.target.dataset.targetTitle,
         url: e.target.dataset.targetImage,
         price: e.target.dataset.targetPrice,
       });
-      //update cart with new item
       window.sessionStorage.setItem("cart", JSON.stringify(cart));
     } else {
-      //create cart
       window.sessionStorage.setItem(
         "cart",
         JSON.stringify([
@@ -61,7 +61,9 @@ function SingleGame() {
       );
     }
   };
+
   const navigate = useNavigate();
+
   const handleAddToCart = () => {
     if (!token) {
       setShowLoginPopup(true);
@@ -79,9 +81,10 @@ function SingleGame() {
         });
     }
   };
+
   return (
-    <div className="bg-white mt-3 mx-auto p-8 flex justify-center">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="bg-white mt-3 mx-auto p-8 flex flex-col justify-center items-center">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-screen-lg">
         <div className="relative bg-white shadow-md rounded-lg p-4">
           <img
             src={game?.image || data?.image}
@@ -89,22 +92,18 @@ function SingleGame() {
             className="w-full h-full object-cover mb-4 rounded-lg"
           />
         </div>
-        <div
-          className="container justify-center
-         mx-auto px-4 py-8"
-        >
+        <div className="p-4 sm:p-0">
           <iframe
-            width="560"
+            width="100%"
             height="315"
             src={game?.trailer}
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-          <div>
-            <h1 className="text-xl mt-2 text-center font-semibold mb-2">
+          <div className="text-center mt-4">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2">
               {game?.title || data?.title}
             </h1>
             <h2 className="text-gray-600 text-lg mb-2">
@@ -124,46 +123,14 @@ function SingleGame() {
               {game?.first_release_date || data?.first_release_date}
             </h2>
           </div>
-          <div className="mx-auto justify-center mt-4 flex flex-col items-center">
+          <div className="mt-4 flex justify-center">
             <button
               onClick={handleAddToCart}
-              className="text-lg bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out"
+              className="text-lg hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out"
             >
               Add to Cart
             </button>
           </div>
-          {showNotification && (
-            <div className="dropdown-notification text-lg">
-              Item added to cart
-            </div>
-          )}
-          {showLoginPopup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 ">
-              <div className="max-w-md w-full mx-4 md:mx-auto p-8 justify-center bg-white shadow-md rounded-lg">
-                <h2 className="text-center text-xl font-semibold mb-4">
-                  Please log in or register
-                </h2>
-                <div className="flex justify-center mb-4">
-                  <button
-                    onClick={() => {
-                      navigate("/auth/login");
-                    }}
-                    className="relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 text-lg ease-in-out"
-                  >
-                    Log In
-                  </button>
-                  <button
-                    onClick={() => {
-                      navigate("/auth/register");
-                    }}
-                    className=" ml-2 relative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 text-lg ease-in-out"
-                  >
-                    Register
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
         <div>
           {users && users.isadmin && (
@@ -290,4 +257,5 @@ function SingleGame() {
     </div>
   );
 }
+
 export default SingleGame;
