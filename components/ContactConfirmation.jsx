@@ -6,7 +6,9 @@ const ContactConfirmation = () => {
     navigate("/");
   };
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div
+      className="flex flex-col items-center justify-center h-screen"
+    >
       <h1 className="text-3xl font-bold mb-8">Thank you for your message!</h1>
       Someone will contact you shortly.
       <button

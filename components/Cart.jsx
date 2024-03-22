@@ -42,7 +42,7 @@ const Cart = () => {
         alignItems: "center",
       }}
     >
-      <div className="bg-white mt-3 mx-auto p-8 w-auto h-auto justify-center">
+      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg">
         <main>
           <h1 className="flex text-3xl font-bold mt-3 tracking-tight text-gray-500 sm:text-4xl justify-center">
             Shopping Cart
@@ -120,7 +120,7 @@ const Cart = () => {
                   <button
                     onClick={checkout}
                     className="w-64 rounded-md  hover:bg-blue border 
-                  border-transparent bg-black px-4 py-3 text-lg font-medium text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  border-transparent bg-black px-4 py-3 text-lg font-medium mt-3 text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                   >
                     Checkout
                   </button>

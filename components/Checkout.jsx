@@ -3,26 +3,31 @@ import { Disclosure } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation } from "../api/ordersApi";
 import { useNavigate } from "react-router-dom";
+
 const Checkout = () => {
   const { cart } = useSelector((state) => state.cartSlice);
   const { token } = useSelector((state) => state.authSlice);
   const navigate = useNavigate();
-  const [createOrder] = useCreateOrderMutation();
-  let subtotal = 0;
-  let taxes = 0;
-  let total = 0;
-  cart.forEach((item) => {
-    subtotal += Number(item?.products?.price);
-    taxes = Number(subtotal * 0.07).toFixed(2);
-    total = Number(subtotal) + Number(taxes);
-  });
-  const handlePay = async (e) => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+
     navigate("/confirmation");
     if (token) {
       await createOrder({ token });
     }
   };
+
+  const [createOrder] = useCreateOrderMutation();
+  let subtotal = 0;
+  let taxes = 0;
+  let total = 0;
+
+  cart.forEach((item) => {
+    subtotal += Number(item?.products?.price);
+    taxes = Number(subtotal * 0.07).toFixed(2);
+    total = Number(subtotal) + Number(taxes);
+  });
   return (
     <div
       style={{
@@ -35,7 +40,7 @@ const Checkout = () => {
         alignItems: "center",
       }}
     >
-      <main className="bg-white mt-3 mx-auto p-8 justify-center">
+      <main className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg">
         <div className="flex items-center justify-center h-full">
           <h1 className="mt-8 mb-4 text-3xl lg:text-2xl font-bold text-center">
             Check out
@@ -57,11 +62,11 @@ const Checkout = () => {
                   </h2>
                   <Disclosure.Button className="mb-8 text-lg  py-3 text-indigo-600 hover:text-indigo-500">
                     {open ? (
-                      <span className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out">
+                      <span className="relative ml-7 bottom-4 left-3 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out">
                         Hide full summary
                       </span>
                     ) : (
-                      <span className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out">
+                      <span className="relative ml-7 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out">
                         Show full summary
                       </span>
                     )}
@@ -108,7 +113,7 @@ const Checkout = () => {
                   </dl>
                 </Disclosure.Panel>
                 <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
-                  <span className="text-base">Total</span>
+                  <span className="text-base">Order Total</span>
                   <span className="text-xl lg:text-2xl font-bold text-center">
                     ${total.toFixed(2)}
                   </span>
@@ -193,7 +198,7 @@ const Checkout = () => {
                 </span>
               </div>
             </div>
-            <form className="mt-6">
+            <form onSubmit={onSubmit} className="mt-6">
               <div className="grid grid-cols-12 gap-x-4 gap-y-6">
                 <div className="col-span-full">
                   <label
@@ -267,7 +272,6 @@ const Checkout = () => {
                       required
                     >
                       <option value="">Month</option>
-                      {/* Add options for each month */}
                       {Array.from({ length: 12 }, (_, i) => {
                         const month = (i + 1).toString().padStart(2, "0");
                         return (
