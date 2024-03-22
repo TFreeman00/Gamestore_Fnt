@@ -100,13 +100,13 @@ const Checkout = () => {
                   <dl className="mt-10 space-y-6  font-medium text-gray-500">
                     <div className="flex justify-between">
                       <dt>Subtotal</dt>
-                      <dd className="text-l lg:text-2xl font-bold text-center">
+                      <dd className="text-l lg:text-xl text-center">
                         ${subtotal.toFixed(2)}
                       </dd>
                     </div>
                     <div className="flex justify-between">
                       <dt>Taxes</dt>
-                      <dd className="text-l lg:text-2xl font-bold text-centertext-gray-900">
+                      <dd className="text-l lg:text-xl text-centertext-gray-900">
                         ${taxes}
                       </dd>
                     </div>
@@ -114,7 +114,7 @@ const Checkout = () => {
                 </Disclosure.Panel>
                 <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
                   <span className="text-base">Order Total</span>
-                  <span className="text-xl lg:text-2xl font-bold text-center">
+                  <span className="text-xl lg:text-xl text-center">
                     ${total.toFixed(2)}
                   </span>
                 </p>
@@ -345,7 +345,7 @@ const Checkout = () => {
               <div className="flex flex-col mt-3 items-center justify-center h-full">
                 <button
                   type="submit"
-                  className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out"
+                  className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white text-xl bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out"
                 >
                   Pay ${total.toFixed(2)}
                 </button>
