@@ -31,98 +31,107 @@ const Cart = () => {
     });
   };
   return (
-    <>
-      <main>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Shopping Cart
-        </h1>
-        <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <section aria-labelledby="cart-heading" className="lg:col-span-7">
-            <h2 id="cart-heading" className="sr-only">
-              Items in your shopping cart
-            </h2>
-            <hr className="my-4" />
-            <ul
-              role="list"
-              className="divide-y divide-gray-200 border-b border-t border-gray-200"
-            >
-              {cart.map((cartItem) => (
-                <div
-                  key={cartItem.id}
-                  className="bg-gray-100 p-4 rounded-md space-y-2"
-                >
-                  <div className="text-lg font-semibold">
-                    {cartItem.products.title}
-                  </div>
-                  <img
-                    className="h-40 w-40"
-                    src={cartItem.products.image}
-                    alt={cartItem.products.title}
-                  />
-                  <div>${cartItem.products.price}</div>
-                  <button
-                    id={cartItem.productid}
-                    onClick={(e) => {
-                      remove(e.target.id);
-                    }}
-                    className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+    <div
+      style={{
+        backgroundImage: `url('https://www.gameopedia.com/wp-content/uploads/2022/05/fC-1170x725.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div className="bg-white mt-3 mx-auto p-8 w-auto h-auto justify-center">
+        <main>
+          <h1 className="flex text-3xl font-bold mt-3 tracking-tight text-gray-500 sm:text-4xl justify-center">
+            Shopping Cart
+          </h1>
+          <form className="mt-12 lg:grid lg:grid-cols-12  lg:gap-x-12 xl:gap-x-16">
+            <section aria-labelledby="cart-heading" className=" lg:col-span-7">
+              <h2 id="cart-heading" className="sr-only text-lg">
+                Items in your shopping cart
+              </h2>
+              <hr className="my-4" />
+              <ul
+                role="list"
+                className="divide-y divide-gray-200 border-b border-t"
+              >
+                {cart.map((cartItem) => (
+                  <div
+                    key={cartItem.id}
+                    className="bg-gray-100 p-4 rounded-md space-y-2"
                   >
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </ul>
-          </section>
-          {/* Order summary */}
-          <section
-            aria-labelledby="summary-heading"
-            className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
-          >
-            <h2
-              id="summary-heading"
-              className="text-lg font-medium text-gray-900"
+                    <div className="text-lg font-semibold">
+                      {cartItem.products.title}
+                    </div>
+                    <img
+                      className="h-40 w-4 mt-4 flex rounded-md bg-gray-200 object-cover object-center"
+                      src={cartItem.products.image}
+                      alt={cartItem.products.title}
+                    />
+                    <div>${cartItem.products.price}</div>
+                    <button
+                      id={cartItem.productid}
+                      onClick={(e) => {
+                        remove(e.target.id);
+                      }}
+                      className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </ul>
+            </section>
+            {/* Order summary */}
+            <section
+              aria-labelledby="summary-heading"
+              className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
             >
-              Order summary
-            </h2>
-            <dl className="mt-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${totalPrice.toFixed(2)}
-                </dd>
+              <h2
+                id="summary-heading"
+                className="text-lg font-medium text-gray-900"
+              >
+                Order summary
+              </h2>
+              <dl className="mt-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <dt className=" text-gray-600">Subtotal</dt>
+                  <dd className=" text-gray-900">${totalPrice.toFixed(2)}</dd>
+                </div>
+                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                  <dt className="flex  text-gray-600">
+                    <span>Tax estimate</span>
+                  </dt>
+                  <dd className="font-medium text-gray-900">
+                    ${(totalPrice * 0.07).toFixed(2)}
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                  <dt className=" font-medium text-gray-900">Order total</dt>
+                  <dd className=" font-medium text-gray-900">
+                    ${(totalPrice * 1.07).toFixed(2)}
+                  </dd>
+                </div>
+              </dl>
+              <div className="flex justify-center mt-6">
+                {cart.length ? (
+                  <button
+                    onClick={checkout}
+                    className="w-64 rounded-md  hover:bg-blue border 
+                  border-transparent bg-black px-4 py-3 text-lg font-medium text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  >
+                    Checkout
+                  </button>
+                ) : null}
               </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex text-sm text-gray-600">
-                  <span>Tax estimate</span>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${(totalPrice * 0.07).toFixed(2)}
-                </dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-base font-medium text-gray-900">
-                  Order total
-                </dt>
-                <dd className="text-base font-medium text-gray-900">
-                  ${(totalPrice * 1.07).toFixed(2)}
-                </dd>
-              </div>
-            </dl>
-            <div className="mt-6">
-              {cart.length ? (
-                <button
-                  onClick={checkout}
-                  className="w-64 rounded-md  hover:bg-blue border border-transparent bg-black px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                >
-                  Checkout
-                </button>
-              ) : null}
-            </div>
-          </section>
-          {token && !cart.length && <p>No Items In Cart</p>}
-        </form>
-      </main>
-    </>
+            </section>
+            {token && !cart.length && <p>No Items In Cart</p>}
+          </form>
+        </main>
+      </div>
+    </div>
   );
 };
 export default Cart;

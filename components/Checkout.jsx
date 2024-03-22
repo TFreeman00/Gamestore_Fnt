@@ -24,8 +24,18 @@ const Checkout = () => {
     }
   };
   return (
-    <>
-      <main className="flex flex-col items-center justify-center  h-full">
+    <div
+      style={{
+        backgroundImage: `url('https://www.gameopedia.com/wp-content/uploads/2022/05/fC-1170x725.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <main className="bg-white mt-3 mx-auto p-8 justify-center">
         <div className="flex items-center justify-center h-full">
           <h1 className="mt-8 mb-4 text-3xl lg:text-2xl font-bold text-center">
             Check out
@@ -33,7 +43,7 @@ const Checkout = () => {
         </div>
         <section
           aria-labelledby="order-heading"
-          className="mt-4 bg-gray-50 px-4 py-6 sm:px-6 lg:hidden"
+          className="mt-4 bg-gray-50 px-4 py-6 sm:px-6 mx-auto lg:hidden"
         >
           <Disclosure as="div" className="mx-auto max-w-lg">
             {({ open }) => (
@@ -41,17 +51,17 @@ const Checkout = () => {
                 <div className="flex items-center justify-between">
                   <h2
                     id="order-heading"
-                    className="mb-8 text-lg font-medium text-gray-900"
+                    className="mb-8 text-2xl text-gray-900"
                   >
                     Your Order
                   </h2>
-                  <Disclosure.Button className="mb-8 font-medium text-indigo-600 hover:text-indigo-500">
+                  <Disclosure.Button className="mb-8 text-lg  py-3 text-indigo-600 hover:text-indigo-500">
                     {open ? (
-                      <span className="frelative bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out">
+                      <span className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out">
                         Hide full summary
                       </span>
                     ) : (
-                      <span className="frelative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-3 py-1 transition duration-300 ease-in-out">
+                      <span className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out">
                         Show full summary
                       </span>
                     )}
@@ -67,10 +77,10 @@ const Checkout = () => {
                         <img
                           src={item?.products?.image}
                           alt={item?.products?.title}
-                          className="h-40 w-4 mt-4 flex-none rounded-md bg-gray-200 object-cover object-center"
+                          className="h-40 w-4 mt-4 flex rounded-md bg-gray-200 object-cover object-center"
                         />
-                        <div className="flex flex-col justify-between space-y-4">
-                          <div className="space-y-1 text-sm font-medium">
+                        <div className="flex flex-col justify-between space-y-4 ">
+                          <div className="space-y-1 font-medium">
                             <h3 className="text-gray-900">
                               {item?.products?.title}
                             </h3>
@@ -82,7 +92,7 @@ const Checkout = () => {
                       </li>
                     ))}
                   </ul>
-                  <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
+                  <dl className="mt-10 space-y-6  font-medium text-gray-500">
                     <div className="flex justify-between">
                       <dt>Subtotal</dt>
                       <dd className="text-l lg:text-2xl font-bold text-center">
@@ -127,7 +137,7 @@ const Checkout = () => {
                   className=""
                 />
                 <div className="flex flex-col justify-between space-y-4">
-                  <div className="space-y-1 text-sm font-medium">
+                  <div className="space-y-1 text-lg font-medium">
                     <h3 className="text-gray-900">{item?.products?.title}</h3>
                     <p className="text-gray-900">{item?.products?.price}</p>
                   </div>
@@ -136,7 +146,7 @@ const Checkout = () => {
             ))}
           </ul>
           <div className="sticky bottom-0 flex-none border-t border-gray-200 bg-gray-50 p-6">
-            <dl className="space-y-6 text-sm font-medium text-gray-500">
+            <dl className="space-y-6 text-md font-medium text-gray-500">
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
                 <dd className="text-gray-900">{subtotal.toFixed(2)}</dd>
@@ -146,7 +156,7 @@ const Checkout = () => {
                 <dd className="text-gray-900">{taxes}</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
-                <dt className="text-base">Total</dt>
+                <dt className="text-lg">Total</dt>
                 <dd className="text-base">{total.toFixed(2)}</dd>
               </div>
             </dl>
@@ -178,7 +188,7 @@ const Checkout = () => {
                 <div className="w-full border-t border-gray-200" />
               </div>
               <div className="relative flex justify-center">
-                <span className="bg-white px-4 text-sm font-medium text-gray-500">
+                <span className="bg-white px-4 text-lg font-medium text-gray-500">
                   or
                 </span>
               </div>
@@ -188,7 +198,7 @@ const Checkout = () => {
                 <div className="col-span-full">
                   <label
                     htmlFor="email-address"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-lg font-medium text-gray-900"
                   >
                     Email address
                   </label>
@@ -206,7 +216,7 @@ const Checkout = () => {
                 <div className="col-span-full">
                   <label
                     htmlFor="name-on-card"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-lg font-medium text-gray-900"
                   >
                     Name on card
                   </label>
@@ -224,7 +234,7 @@ const Checkout = () => {
                 <div className="col-span-full">
                   <label
                     htmlFor="card-number"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-lg font-medium text-gray-900"
                   >
                     Card number
                   </label>
@@ -245,7 +255,7 @@ const Checkout = () => {
                 <div className="col-span-8 sm:col-span-9">
                   <label
                     htmlFor="expiration-date"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-lg font-medium text-gray-900"
                   >
                     Expiration date
                   </label>
@@ -259,7 +269,7 @@ const Checkout = () => {
                       <option value="">Month</option>
                       {/* Add options for each month */}
                       {Array.from({ length: 12 }, (_, i) => {
-                        const month = (i + 1).toString().padStart(2, "0"); // Pad single digit months with leading zero
+                        const month = (i + 1).toString().padStart(2, "0");
                         return (
                           <option key={month} value={month}>
                             {month}
@@ -270,18 +280,17 @@ const Checkout = () => {
                     <select
                       id="expiration-year"
                       name="expirationYear"
-                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm gap-2"
                       required
                     >
                       <option value="">Year</option>
-                      {/* Add options for years, starting from current year */}
                       {Array.from({ length: 10 }, (_, i) => {
                         const year = new Date().getFullYear() + i;
                         return (
                           <option key={year} value={year}>
                             {year.toString().slice(-2)}
                           </option>
-                        ); // Use last two digits of the year
+                        );
                       })}
                     </select>
                   </div>
@@ -289,7 +298,7 @@ const Checkout = () => {
                 <div className="col-span-4 sm:col-span-3">
                   <label
                     htmlFor="cvc"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-lg font-medium text-gray-900"
                   >
                     CVC
                   </label>
@@ -310,11 +319,11 @@ const Checkout = () => {
                 <div className="col-span-full sm:col-span-4">
                   <label
                     htmlFor="postal-code"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-lg font-medium text-gray-900"
                   >
                     Billing Zip code
                   </label>
-                  <div className="mt-1">
+                  <div className="flex mt-1 justify-center">
                     <input
                       type="number"
                       id="postal-code"
@@ -329,10 +338,10 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center h-full">
+              <div className="flex flex-col mt-3 items-center justify-center h-full">
                 <button
                   type="submit"
-                  className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="relative ml-8 bottom-4 left-4 hover:bg-blue hover:text-white bg-transparent border border-black rounded-md px-6 py-3 transition duration-300 ease-in-out"
                 >
                   Pay ${total.toFixed(2)}
                 </button>
@@ -341,7 +350,7 @@ const Checkout = () => {
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 };
 export default Checkout;

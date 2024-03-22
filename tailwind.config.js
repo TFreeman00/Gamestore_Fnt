@@ -10,6 +10,12 @@ module.exports = {
       lg: "976px",
       xl: "1440px",
     },
+    extend: {
+      backgroundImage: {
+        mario:
+          "url('https://i.pinimg.com/474x/a9/07/46/a907462c092ecc710299d978f1d3605b.jpg')",
+      },
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -60,10 +66,13 @@ module.exports = {
         dark: "#8492a6",
         DEFAULT: "#d3dce6",
         light: "#f0f4f8",
-        500: "#6b7280",
+        900: "#111827",
         600: "#4b5563",
-        100: "#f3f4f6",
+        500: "#6b7280",
         300: "#d1d5db",
+        200: "#e5e7eb",
+        100: "#f3f4f6",
+        50: "#f9fafb",
       },
       indigo: {
         500: "#6366f1",
