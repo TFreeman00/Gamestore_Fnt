@@ -806,6 +806,10 @@ textarea::placeholder {
   left: 0;
 }
 
+.max-w-7xl {
+  max-width: 80rem/* 1280px */;
+}
+
 .aspect-h-9 {
   --tw-aspect-h: 9;
 }
@@ -814,9 +818,21 @@ textarea::placeholder {
   width: 100%;
 }
 
+.drop-shadow {
+  --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 @media (min-width: 768px) {
   .md\:text-6xl {
     font-size: 4rem /* 64px */;
+  }
+}
+
+@media (min-width: 480px) {
+  .sm\:px-6 {
+    padding-left: 1.5rem/* 24px */;
+    padding-right: 1.5rem/* 24px */;
   }
 }
 
@@ -871,6 +887,13 @@ textarea::placeholder {
 @media (min-width: 768px) {
   .md\:text-6xl {
     font-size: 4rem /* 64px */;
+  }
+}
+
+@media (min-width: 976px) {
+  .lg\:px-8 {
+    padding-left: 2rem/* 32px */;
+    padding-right: 2rem/* 32px */;
   }
 }
 
@@ -941,6 +964,10 @@ textarea::placeholder {
 
 .mr-2 {
   margin-right: 0.5rem;
+}
+
+.mr-6 {
+  margin-right: 2rem/* 24px */;
 }
 
 .mt-1 {
@@ -1097,6 +1124,10 @@ textarea::placeholder {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.-inset-0\.5 {
+  inset: -0.125rem/* -2px */;
 }
 
 .gap-6 {
@@ -1364,6 +1395,10 @@ textarea::placeholder {
 }
 .hover\:bg-blue-700:hover {
   background-color: #1d4ed8;
+}
+.hover\:text-blue-700:hover {
+  --tw-text-opacity: 1;
+  color: #1d4ed8;;
 }
 .hover\:bg-gray-100:hover {
   background-color: #f3f4f6;
