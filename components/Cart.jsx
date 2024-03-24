@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDeleteCartMutation, useGetCartQuery } from "../api/cartApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 const Cart = () => {
   const { token } = useSelector((state) => state.authSlice);
@@ -87,8 +88,9 @@ const Cart = () => {
                         remove(e.target.id);
                       }}
                       className="text-black hover:bg-blue hover:text-white bg-transparent border rounded-md px-3 py-1 transition duration-300 ease-in-out"
-                    >
-                      Remove
+                      >
+                      <TrashIcon className="h-6 w-6" />
+                      
                     </button>
                   </div>
                 ))}

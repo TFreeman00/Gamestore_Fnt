@@ -132,7 +132,7 @@ function SingleGame() {
             </button>
           </div>
           {showNotification && (
-            <div className="dropdown-notification text-lg flex flex-col items-center justify-center mt-4">
+            <div className="dropdown-notification text-blue-500 text-lg flex flex-col items-center justify-center mt-4 animate-bounce transition-transform">
               Item added to cart
             </div>
           )}

@@ -53,17 +53,17 @@ const Navbar = () => {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-gray-300 drop-shadow">
       <div className="flex h-16 justify-between">
         <div className="flex relative justify-start mr-6 mt-2">
-        <a
-          href="/"
-          className="text-black font-bold text-lg hover:text-blue-700 bg-transparent duration-300 rounded-md px-4 py-2 flex items-center mb-4 sm:mb-0"
-        >
-          <img
-            src={imageUrl}
-            alt="Icon"
-            className="flex sm:inline justify-start gap-2 w-9 h-9 mr-4"
-          />{" "}
-          VGstore
-        </a>
+          <a
+            href="/"
+            className="text-black font-bold text-lg hover:text-blue-700 bg-transparent duration-300 rounded-md px-4 py-2 flex items-center mb-4 sm:mb-0 hover:animate-pulse"
+          >
+            <img
+              src={imageUrl}
+              alt="Icon"
+              className="flex sm:inline justify-start gap-2 w-9 h-9 mr-4"
+            />{" "}
+            VGstore
+          </a>
         </div>
         <div className="flex items-center mt-3 ml-1 text-lg space-x-4 mb-4 sm:mb-0">
           {token && (
@@ -75,31 +75,33 @@ const Navbar = () => {
             <>
               <button
                 onClick={() => navigate("/auth/login")}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
               >
                 Login
               </button>
               <button
                 onClick={() => navigate("/auth/register")}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
               >
                 Register
               </button>
               {showLogoutMessage && (
-                <p className="text-red-500">You are logged out</p>
+                <p className="text-blue-500 animate-bounce duration-300 ease-in-out">
+                  You are logged out
+                </p>
               )}
             </>
           ) : (
             <>
               <button
                 onClick={() => navigate("/auth/me")}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
               >
                 Account
               </button>
               <button
                 onClick={logout}
-                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+                className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
               >
                 Logout
               </button>
@@ -108,7 +110,7 @@ const Navbar = () => {
           {token && users.isadmin && (
             <button
               onClick={() => navigate("/users")}
-              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
             >
               User
             </button>
@@ -116,14 +118,14 @@ const Navbar = () => {
           {token && users.isadmin && (
             <button
               onClick={() => navigate("/admin")}
-              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+              className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
             >
               Admin Dashboard
             </button>
           )}
           <button
             onClick={() => navigate("/games")}
-            className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4"
+            className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 sm:px-4 hover:animate-pulse"
           >
             Games
           </button>
