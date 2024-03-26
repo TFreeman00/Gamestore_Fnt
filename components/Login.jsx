@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../api/authApi";
 import { useSessionAddToCartMutation } from "../api/cartApi";
+
+
 export default function Login() {
   const [cart] = useSessionAddToCartMutation();
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ export default function Login() {
         alignItems: "center",
       }}
     >
-      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg">
+      <div className="max-w-md w-full mx-4 md:mx-auto p-8 bg-white shadow-md rounded-lg"style={{ opacity: 0.9 }}>
         <h2 className="text-2xl text-center font-bold mb-4">Login</h2>
         <form onSubmit={onSubmit} className="space-y-4">
           <label className="flex flex-col">

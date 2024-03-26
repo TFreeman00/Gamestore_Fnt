@@ -5,6 +5,7 @@ import { useCreateGameMutation } from "../api/gamesApi";
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const [createGame] = useCreateGameMutation();
+  const [showNotification, setShowNotification] = useState(false);
   const [formData, setFormData] = useState({
     id: null,
     title: "",
@@ -27,7 +28,14 @@ const AdminDashboard = () => {
       price: Number(formData.price),
     });
     console.log(result);
-  };
+    try {
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 3000);
+  } catch (error) {
+    console.log("Error game not added", error);
+  }
+   
+};
 
   return (
     <div
@@ -147,7 +155,12 @@ const AdminDashboard = () => {
             >
               Add Game
             </button>
+            {showNotification && (
+            <div className="dropdown-notification text-lg flex flex-col items-center justify-center mt-4">
+              Game added successfully!
           </div>
+            )}
+            </div>
         </form>
       </div>
     </div>

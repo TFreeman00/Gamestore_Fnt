@@ -2,6 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { cartApi } from "../api/cartApi";
 import { ordersApi } from "../api/ordersApi";
+
+
 const cartSlice = createSlice({
   name: "cartSlice",
   initialState: { cart: [] },
