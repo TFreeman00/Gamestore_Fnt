@@ -17,11 +17,22 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token, users } = useSelector((state) => state.authSlice);
-  const { cart } = useSelector((state) => state.cartSlice);
+  const { cartItemCount } = useSelector((state) => state.cartSlice);
 
   useEffect(() => {
     dispatch(updateCartItemCount());
   }, [dispatch]);
+
+  useEffect(() => {
+    const storedCartLength = sessionStorage.getItem("cartLength");
+    if (storedCartLength) {
+      dispatch(updateCartItemCount(parseInt(storedCartLength)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    sessionStorage.setItem("cartLength", cartItemCount.toString());
+  }, [cartItemCount]);
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -35,12 +46,12 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, []); 
+  }, []);
 
   const logout = () => {
     dispatch(setToken(null));
     window.sessionStorage.removeItem("authToken");
-    setShowLogoutMessage(true); 
+    setShowLogoutMessage(true);
     setTimeout(() => setShowLogoutMessage(false), 3000);
     navigate("/");
   };
@@ -156,9 +167,11 @@ const Navbar = () => {
             className="text-black hover:text-gray-300 bg-gray duration-300 rounded-md px-2 py-2 sm:px-4 relative"
           >
             <ShoppingCartIcon className="h-6 w-6 sm:h-6 sm:w-6 mt-3" />
+            {cartItemCount > 0 && (
             <span className="absolute top-0 right-0 mr-0.5 text-blue-500 rounded-full mt-2 px-1.5 sm:px-2 py-0.5 text-xs sm:text-lg">
-              {cart.length}
+              {cartItemCount}
             </span>
+            )}
           </button>
         </div>
       </div>
