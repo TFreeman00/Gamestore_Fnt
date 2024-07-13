@@ -14,6 +14,7 @@ const imageUrl =
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showLogoutMessage, setShowLogoutMessage] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token, users } = useSelector((state) => state.authSlice);
@@ -60,6 +61,10 @@ const Navbar = () => {
     navigate(`/games?search=${searchQuery}`);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-gray-300 drop-shadow">
       <div className="flex h-16 justify-between">
@@ -76,7 +81,7 @@ const Navbar = () => {
             VGstore
           </a>
         </div>
-        <div className="flex items-center mt-3 ml-1 text-lg space-x-4 mb-4 sm:mb-0">
+        <div className="hidden sm:flex items-center mt-3 ml-1 text-lg space-x-4 mb-4 sm:mb-0">
           {token && (
             <span className="sm:inline ml-3 text-black animate-pulse">
               Welcome, {users.firstname}!
@@ -168,11 +173,110 @@ const Navbar = () => {
           >
             <ShoppingCartIcon className="h-6 w-6 sm:h-6 sm:w-6 mt-3" />
             {cartItemCount > 0 && (
-            <span className="absolute top-0 right-0 mr-0.5 text-blue-500 rounded-full mt-2 px-1.5 sm:px-2 py-0.5 text-xs sm:text-lg">
-              {cartItemCount}
-            </span>
+              <span className="absolute top-0 right-0 mr-0.5 text-blue-500 rounded-full mt-2 px-1.5 sm:px-2 py-0.5 text-xs sm:text-lg">
+                {cartItemCount}
+              </span>
             )}
           </button>
+        </div>
+        <div className="sm:hidden">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-black hover:text-gray-300 bg-gray duration-300 rounded-md px-2 py-2 sm:px-4"
+          >
+            <svg
+              className="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+          {isMobileMenuOpen && (
+            <div className=" top-16 right-0 bg-gray-300 rounded-md shadow-lg mt-2">
+              <div className="flex flex-col p-4 space-y-2">
+                {token && (
+                  <span className="text-black animate-pulse">
+                    Welcome, {users.firstname}!
+                  </span>
+                )}
+                {!token ? (
+                  <>
+                    <button
+                      onClick={() => navigate("/auth/login")}
+                      className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                    >
+                      Login
+                    </button>
+                    <button
+                      onClick={() => navigate("/auth/register")}
+                      className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                    >
+                      Register
+                    </button>
+                    {showLogoutMessage && (
+                      <p className="text-blue-500 animate-bounce duration-300 ease-in-out">
+                        You are logged out
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => navigate("/auth/me")}
+                      className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                    >
+                      Account
+                    </button>
+                    <button
+                      onClick={logout}
+                      className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                    >
+                      Logout
+                    </button>
+                  </>
+                )}
+                {token && users.isadmin && (
+                  <button
+                    onClick={() => navigate("/users")}
+                    className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                  >
+                    User
+                  </button>
+                )}
+                {token && users.isadmin && (
+                  <button
+                    onClick={() => navigate("/admin")}
+                    className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                  >
+                    Admin Dashboard
+                  </button>
+                )}
+                <button
+                  onClick={() => navigate("/games")}
+                  className="text-black hover:text-gray-300 bg-gray hover:bg-blue-700 duration-300 rounded-md px-2 py-2 hover:animate-pulse"
+                >
+                  Games
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
