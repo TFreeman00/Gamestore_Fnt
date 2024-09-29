@@ -83,7 +83,7 @@ const Navbar = () => {
         </div>
         <div className="hidden sm:flex items-center mt-3 ml-1 text-lg space-x-4 mb-4 sm:mb-0">
           {token && (
-            <span className="sm:inline ml-3 text-black animate-pulse">
+            <span className="sm:inline ml-3 5068text-black animate-pulse">
               Welcome, {users.firstname}!
             </span>
           )}
